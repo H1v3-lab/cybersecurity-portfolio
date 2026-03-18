@@ -831,13 +831,144 @@
     50% { opacity: 0; }
   }
 
+  /* --- Mobile Navigation --- */
+  .nav-burger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    background: none;
+    border: 1px solid var(--border);
+    cursor: none;
+    padding: 8px 10px;
+    z-index: 102;
+  }
+  .nav-burger span {
+    display: block;
+    width: 22px; height: 1.5px;
+    background: var(--accent);
+    transition: all 0.3s ease;
+  }
+  .nav-burger.open span:nth-child(1) { transform: rotate(45deg) translate(4.5px, 4.5px); }
+  .nav-burger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .nav-burger.open span:nth-child(3) { transform: rotate(-45deg) translate(4.5px, -4.5px); }
+
+  .mobile-nav {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(5,10,14,0.98);
+    z-index: 101;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 36px;
+  }
+  .mobile-nav.open { display: flex; }
+  .mobile-nav a {
+    font-family: 'Space Mono', monospace;
+    font-size: 18px;
+    color: var(--text-dim);
+    text-decoration: none;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  .mobile-nav a:hover { color: var(--accent); }
+
+  /* --- Lab Portfolio Section --- */
+  #lab-portfolio { background: var(--bg3); }
+
+  .section-desc {
+    font-size: 15px;
+    color: var(--text-dim);
+    line-height: 1.8;
+    max-width: 720px;
+    margin-bottom: 44px;
+    margin-top: -40px;
+  }
+
+  .project-filters {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+
+  .filter-btn {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    padding: 8px 18px;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: none;
+    transition: all 0.25s;
+    clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+  }
+  .filter-btn:hover { color: var(--text); border-color: rgba(0,229,255,0.4); }
+  .filter-btn.active {
+    background: rgba(0,229,255,0.08);
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .project-count {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 2px;
+    margin-bottom: 32px;
+  }
+
+  .projects-grid-full {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .project-card.hidden { display: none; }
+
+  /* Category badges */
+  .project-cat {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px;
+    padding: 3px 8px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-bottom: 12px;
+  }
+  .cat-network   { background: rgba(0,229,255,0.08);   border: 1px solid rgba(0,229,255,0.25);   color: var(--accent); }
+  .cat-offensive { background: rgba(255,77,109,0.08);  border: 1px solid rgba(255,77,109,0.25);  color: var(--accent3); }
+  .cat-forensics { background: rgba(127,255,0,0.08);   border: 1px solid rgba(127,255,0,0.25);   color: var(--accent2); }
+  .cat-cloud     { background: rgba(180,120,255,0.08); border: 1px solid rgba(180,120,255,0.25); color: #b47aff; }
+  .cat-web       { background: rgba(255,165,0,0.08);   border: 1px solid rgba(255,165,0,0.25);   color: #ffa500; }
+
+  /* Project tech tags inside lab grid */
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 16px;
+  }
+
+  /* Responsive */
+  @media (max-width: 1200px) {
+    .projects-grid-full { grid-template-columns: 1fr 1fr; }
+  }
+
   /* Responsive */
   @media (max-width: 900px) {
     nav { padding: 20px 24px; }
     .nav-links { display: none; }
+    .nav-burger { display: flex; }
     #hero, .section-inner { padding-left: 24px; padding-right: 24px; }
     .stats-bar { margin: 0 24px; flex-wrap: wrap; }
     .skills-grid, .projects-grid, .achievements-layout, .contact-grid { grid-template-columns: 1fr; }
+    .projects-grid-full { grid-template-columns: 1fr; }
     .hero-visual { display: none; }
     footer { padding: 24px; flex-direction: column; gap: 12px; text-align: center; }
   }
@@ -855,11 +986,24 @@
   <ul class="nav-links">
     <li><a href="#skills">Skills</a></li>
     <li><a href="#projects">Projects</a></li>
+    <li><a href="#lab-portfolio">Lab</a></li>
     <li><a href="#achievements">CTF</a></li>
     <li><a href="#certifications">Certs</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
+  <button class="nav-burger" id="navBurger" aria-label="Toggle navigation" aria-expanded="false">
+    <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+  </button>
 </nav>
+
+<div class="mobile-nav" id="mobileNav">
+  <a href="#skills">Skills</a>
+  <a href="#projects">Projects</a>
+  <a href="#lab-portfolio">Lab Portfolio</a>
+  <a href="#achievements">CTF</a>
+  <a href="#certifications">Certifications</a>
+  <a href="#contact">Contact</a>
+</div>
 
 <!-- Hero -->
 <section id="hero">
@@ -908,6 +1052,10 @@
   <div class="stat-item">
     <div class="stat-number">5+</div>
     <div class="stat-label">Certifications</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">25+</div>
+    <div class="stat-label">Lab Projects</div>
   </div>
   <div class="stat-item">
     <div class="stat-number">3+</div>
@@ -1078,6 +1226,305 @@
   </div>
 </section>
 
+<!-- Lab Portfolio -->
+<section id="lab-portfolio">
+  <div class="section-inner">
+    <div class="section-tag">Technical Depth</div>
+    <h2 class="section-title">Lab <span>Portfolio</span></h2>
+    <p class="section-desc">25 hands-on cybersecurity projects spanning network defense, offensive operations, digital forensics, cloud security and AI-powered threat detection — each built and tested in an isolated environment.</p>
+
+    <div class="project-filters" id="projectFilters">
+      <button class="filter-btn active" data-filter="all" aria-pressed="true">◈ All (25)</button>
+      <button class="filter-btn" data-filter="network" aria-pressed="false">⬡ Network Security</button>
+      <button class="filter-btn" data-filter="offensive" aria-pressed="false">⚔ Offensive Ops</button>
+      <button class="filter-btn" data-filter="forensics" aria-pressed="false">🔬 Forensics & DFIR</button>
+      <button class="filter-btn" data-filter="cloud" aria-pressed="false">☁ Cloud & AI</button>
+      <button class="filter-btn" data-filter="web" aria-pressed="false">🌐 Web Security</button>
+    </div>
+
+    <div class="project-count" id="projectCount">// Showing all 25 projects</div>
+
+    <div class="projects-grid-full" id="labGrid">
+
+      <div class="project-card" data-category="network">
+        <div class="project-num">LAB_01</div>
+        <span class="project-cat cat-network">Network Security</span>
+        <h3 class="project-title">Home Lab Setup</h3>
+        <div class="project-subtitle">🏠 Virtualized Cyber Lab</div>
+        <p class="project-desc">Complete home cybersecurity lab with VLAN-segmented network, virtualized infrastructure (VMware/Proxmox) and isolated attack/defense environments for hands-on training.</p>
+        <div class="project-tags">
+          <span class="tag">VMware</span><span class="tag">Proxmox</span><span class="tag">pfSense</span><span class="tag">Kali Linux</span><span class="tag">VLANs</span>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="network">
+        <div class="project-num">LAB_02</div>
+        <span class="project-cat cat-network">Network Security</span>
+        <h3 class="project-title">Firewall Configuration</h3>
+        <div class="project-subtitle">🔥 Enterprise Perimeter Defense</div>
+        <p class="project-desc">Enterprise-grade firewall deployment with granular rule sets, QoS optimization, SSL inspection and compliance-ready audit logging for PCI-DSS and SOX environments.</p>
+        <div class="project-tags">
+          <span class="tag">pfSense</span><span class="tag">FortiGate</span><span class="tag">Python</span><span class="tag">PCI-DSS</span>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="network">
+        <div class="project-num">LAB_03</div>
+        <span class="project-cat cat-network">Network Security</span>
+        <h3 class="project-title">Wireshark Traffic Analysis</h3>
+        <div class="project-subtitle">📡 Network Forensics Lab</div>
+        <p class="project-desc">Deep packet inspection and network traffic forensics with Wireshark, custom Python dissectors, automated anomaly detection and protocol analysis scripts.</p>
+        <div class="project-tags">
+          <span class="tag">Wireshark</span><span class="tag">Python</span><span class="tag">tcpdump</span><span class="tag">Tshark</span>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="network">
+        <div class="project-num">LAB_04</div>
+        <span class="project-cat cat-network">Network Security</span>
+        <h3 class="project-title">IDS/IPS Implementation</h3>
+        <div class="project-subtitle">🛡️ Multilayer Intrusion Detection</div>
+        <p class="project-desc">Enterprise multi-layer IDS/IPS architecture with custom Snort/Suricata signatures, automated incident response playbooks and full SIEM integration.</p>
+        <div class="project-tags">
+          <span class="tag">Snort</span><span class="tag">Suricata</span><span class="tag">SIEM</span><span class="tag">Docker</span>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="network">
+        <div class="project-num">LAB_05</div>
+        <span class="project-cat cat-network">Network Security</span>
+        <h3 class="project-title">VPN Management System</h3>
+        <div class="project-subtitle">🔐 Enterprise VPN Infrastructure</div>
+        <p class="project-desc">Comprehensive VPN management with automated PKI certificate lifecycle, OpenVPN/IPSec dual-stack support, Ansible-driven deployment and compliance monitoring.</p>
+        <div class="project-tags">
+          <span class="tag">OpenVPN</span><span class="tag">IPSec</span><span class="tag">Ansible</span><span class="tag">PKI</span>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="network">
+        <div class="project-num">LAB_06</div>
+        <span class="project-cat cat-network">Network Security</span>
+        <h3 class="project-title">Secure Network Design</h3>
+        <div class="project-subtitle">⬡ Zero Trust Architecture</div>
+        <p class="project-desc">Enterprise Zero Trust network with microsegmentation, Network Access Control (NAC), automated policy enforcement and full visibility via GNS3/Terraform IaC.</p>
+        <div class="project-tags">
+          <span class="tag">Zero Trust</span><span class="tag">VLAN</span><span class="tag">NAC</span><span class="tag">Terraform</span>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="network">
+        <div class="project-num">LAB_07</div>
+        <span class="project-cat cat-network">Network Security</span>
+        <h3 class="project-title">Wireless Security</h3>
+        <div class="project-subtitle">📡 WPA3 Enterprise Deployment</div>
+        <p class="project-desc">Enterprise WiFi security with WPA3 implementation, 802.1X/RADIUS authentication, wireless intrusion detection and PCI-DSS-compliant guest network isolation.</p>
+        <div class="project-tags">
+          <span class="tag">WPA3</span><span class="tag">802.1X</span><span class="tag">RADIUS</span><span class="tag">WIDS</span>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="network">
+        <div class="project-num">LAB_08</div>
+        <span class="project-cat cat-network">Identity & Access</span>
+        <h3 class="project-title">Identity & Access Management</h3>
+        <div class="project-subtitle">🪪 Zero Trust IAM Platform</div>
+        <p class="project-desc">Full enterprise IAM solution with Active Directory, SSO (SAML 2.0/OAuth 2.0), MFA, Privileged Access Management and automated Zero Trust compliance frameworks.</p>
+        <div class="project-tags">
+          <span class="tag">Active Directory</span><span class="tag">SAML 2.0</span><span class="tag">OAuth</span><span class="tag">MFA</span><span class="tag">Keycloak</span>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="cloud">
+        <div class="project-num">LAB_09</div>
+        <span class="project-cat cat-cloud">Cloud Security</span>
+        <h3 class="project-title">Cloud Security Governance</h3>
+        <div class="project-subtitle">☁ Multi-Cloud CSPM</div>
+        <p class="project-desc">Multi-cloud security governance with policy-as-code, automated compliance scanning, Cloud Security Posture Management (CSPM) across AWS, Azure and GCP.</p>
+        <div class="project-tags">
+          <span class="tag">AWS</span><span class="tag">Azure</span><span class="tag">GCP</span><span class="tag">Terraform</span><span class="tag">CSPM</span>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="cloud">
+        <div class="project-num">LAB_10</div>
+        <span class="project-cat cat-cloud">Threat Intelligence</span>
+        <h3 class="project-title">Threat Intelligence Platform</h3>
+        <div class="project-subtitle">🎯 CTI Aggregation & Analysis</div>
+        <p class="project-desc">Enterprise CTI platform aggregating multiple threat feeds with STIX/TAXII standards, ML-powered classification and automated threat hunting capabilities.</p>
+        <div class="project-tags">
+          <span class="tag">STIX/TAXII</span><span class="tag">MISP</span><span class="tag">Python</span><span class="tag">ML</span><span class="tag">Elasticsearch</span>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="forensics">
+        <div class="project-num">LAB_11</div>
+        <span class="project-cat cat-forensics">Forensics</span>
+        <h3 class="project-title">Malware Analysis Sandbox</h3>
+        <div class="project-subtitle">🦠 Behavioral Analysis Lab</div>
+        <p class="project-desc">Isolated sandbox for comprehensive malware analysis — static, dynamic and behavioral — with YARA rule authoring, automated sandboxing and threat intel correlation.</p>
+        <div class="project-tags">
+          <span class="tag green">Cuckoo</span><span class="tag green">YARA</span><span class="tag green">IDA Pro</span><span class="tag green">Docker</span>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="offensive">
+        <div class="project-num">LAB_12</div>
+        <span class="project-cat cat-offensive">Offensive Security</span>
+        <h3 class="project-title">Penetration Testing Framework</h3>
+        <div class="project-subtitle">⚔ OWASP/PTES Methodology</div>
+        <p class="project-desc">Structured penetration testing framework following OWASP, PTES and NIST standards — covering web, network, wireless and mobile with automated professional reporting.</p>
+        <div class="project-tags">
+          <span class="tag red">Metasploit</span><span class="tag red">Nmap</span><span class="tag red">Burp Suite</span><span class="tag red">OWASP</span>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="web">
+        <div class="project-num">LAB_13</div>
+        <span class="project-cat cat-web">Web Security</span>
+        <h3 class="project-title">Web Application Security</h3>
+        <div class="project-subtitle">🌐 OWASP Top 10 Testing</div>
+        <p class="project-desc">Complete web app security testing framework covering OWASP Top 10 2021 and ASVS 4.0 with automated scanning, manual exploitation and professional reporting.</p>
+        <div class="project-tags">
+          <span class="tag">OWASP Top 10</span><span class="tag">Burp Suite</span><span class="tag">SQLMap</span><span class="tag">ASVS</span>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="forensics">
+        <div class="project-num">LAB_14</div>
+        <span class="project-cat cat-forensics">Forensics & DFIR</span>
+        <h3 class="project-title">Digital Forensics & IR</h3>
+        <div class="project-subtitle">🔬 NIST/SANS DFIR Framework</div>
+        <p class="project-desc">End-to-end DFIR framework following NIST SP 800-86 and SANS methodology for evidence acquisition, timeline reconstruction and legally admissible incident reporting.</p>
+        <div class="project-tags">
+          <span class="tag green">Autopsy</span><span class="tag green">Volatility</span><span class="tag green">Python</span><span class="tag green">NIST</span>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="offensive">
+        <div class="project-num">LAB_15</div>
+        <span class="project-cat cat-offensive">Offensive Security</span>
+        <h3 class="project-title">Red Team Operations</h3>
+        <div class="project-subtitle">🎭 APT Simulation Framework</div>
+        <p class="project-desc">Advanced red team framework simulating nation-state APT campaigns with C2 infrastructure, lateral movement techniques and comprehensive MITRE ATT&CK coverage.</p>
+        <div class="project-tags">
+          <span class="tag red">C2 Framework</span><span class="tag red">MITRE ATT&CK</span><span class="tag red">OPSEC</span><span class="tag red">Python</span>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="offensive">
+        <div class="project-num">LAB_16</div>
+        <span class="project-cat cat-offensive">Offensive Security</span>
+        <h3 class="project-title">Exploit Development</h3>
+        <div class="project-subtitle">💥 Binary Exploitation Lab</div>
+        <p class="project-desc">Custom exploit development covering stack-based buffer overflow, heap exploitation, ROP chain construction, ASLR/DEP bypass and weaponized payload creation from scratch.</p>
+        <div class="project-tags">
+          <span class="tag red">GDB/PWNDBG</span><span class="tag red">Python</span><span class="tag red">Assembly</span><span class="tag red">ROP Chains</span>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="offensive">
+        <div class="project-num">LAB_17</div>
+        <span class="project-cat cat-offensive">Offensive Security</span>
+        <h3 class="project-title">Social Engineering Simulation</h3>
+        <div class="project-subtitle">🎣 Human Vulnerability Testing</div>
+        <p class="project-desc">Comprehensive social engineering simulation with phishing campaigns, vishing scenarios, pretexting playbooks and measurable security awareness impact analysis.</p>
+        <div class="project-tags">
+          <span class="tag red">GoPhish</span><span class="tag red">SET</span><span class="tag red">OSINT</span><span class="tag red">Python</span>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="offensive">
+        <div class="project-num">LAB_18</div>
+        <span class="project-cat cat-offensive">Offensive Security</span>
+        <h3 class="project-title">Password Cracking & Analysis</h3>
+        <div class="project-subtitle">🔑 Credential Security Audit</div>
+        <p class="project-desc">GPU-accelerated password security audit suite with Hashcat/JtR, custom wordlists, rule-based mask attacks, hash identification and policy compliance testing.</p>
+        <div class="project-tags">
+          <span class="tag red">Hashcat</span><span class="tag red">John the Ripper</span><span class="tag red">GPU</span><span class="tag red">Python</span>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="forensics">
+        <div class="project-num">LAB_19</div>
+        <span class="project-cat cat-forensics">Forensics</span>
+        <h3 class="project-title">Forensic Analysis Toolkit</h3>
+        <div class="project-subtitle">🔍 Multi-Vector Investigation Suite</div>
+        <p class="project-desc">Modular forensic toolkit covering disk, memory, network and mobile forensics with timeline analysis, AI-powered artifact correlation and automated reporting.</p>
+        <div class="project-tags">
+          <span class="tag green">Python</span><span class="tag green">Volatility</span><span class="tag green">NetworkMiner</span><span class="tag green">ELK</span>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="cloud">
+        <div class="project-num">LAB_20</div>
+        <span class="project-cat cat-cloud">Threat Intelligence</span>
+        <h3 class="project-title">Threat Hunting SOC</h3>
+        <div class="project-subtitle">🎯 Proactive APT Detection</div>
+        <p class="project-desc">Advanced SOC platform with proactive threat hunting, ML-powered behavioral analytics, Sigma rule deployment and orchestrated SOAR incident response workflows.</p>
+        <div class="project-tags">
+          <span class="tag">ELK Stack</span><span class="tag">Sigma Rules</span><span class="tag">ML</span><span class="tag">SOAR</span>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="cloud">
+        <div class="project-num">LAB_21</div>
+        <span class="project-cat cat-cloud">AI Security</span>
+        <h3 class="project-title">AI-Powered Cybersecurity</h3>
+        <div class="project-subtitle">🤖 ML Threat Detection Platform</div>
+        <p class="project-desc">AI/ML cybersecurity platform with deep learning anomaly detection, NLP-powered log analysis, automated threat intel extraction and predictive security analytics.</p>
+        <div class="project-tags">
+          <span class="tag">TensorFlow</span><span class="tag">NLP</span><span class="tag">Python</span><span class="tag">FastAPI</span>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="cloud">
+        <div class="project-num">LAB_22</div>
+        <span class="project-cat cat-cloud">Blockchain Security</span>
+        <h3 class="project-title">Blockchain Security Forensics</h3>
+        <div class="project-subtitle">🔗 Crypto Investigation Platform</div>
+        <p class="project-desc">Blockchain security and crypto forensics with transaction graph analysis, smart contract vulnerability auditing (Slither/Mythril) and DeFi threat monitoring.</p>
+        <div class="project-tags">
+          <span class="tag">Web3</span><span class="tag">Ethereum</span><span class="tag">Python</span><span class="tag">Slither</span>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="web">
+        <div class="project-num">LAB_23</div>
+        <span class="project-cat cat-web">Web Security</span>
+        <h3 class="project-title">Bug Bounty Platform</h3>
+        <div class="project-subtitle">🐛 Automated Vuln Discovery</div>
+        <p class="project-desc">Automated vulnerability discovery platform combining intelligent recon, Nuclei-powered scanning and structured bug bounty program management workflows.</p>
+        <div class="project-tags">
+          <span class="tag">Nuclei</span><span class="tag">Subfinder</span><span class="tag">OWASP ZAP</span><span class="tag">Docker</span>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="cloud">
+        <div class="project-num">LAB_24</div>
+        <span class="project-cat cat-cloud">DevSecOps</span>
+        <h3 class="project-title">DevSecOps Pipeline Security</h3>
+        <div class="project-subtitle">🔄 Shift-Left Security CI/CD</div>
+        <p class="project-desc">Complete DevSecOps pipeline with integrated SAST/DAST analysis, container security scanning, dependency auditing and automated compliance enforcement across CI/CD.</p>
+        <div class="project-tags">
+          <span class="tag">Jenkins</span><span class="tag">GitLab CI</span><span class="tag">SAST/DAST</span><span class="tag">Kubernetes</span>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="cloud">
+        <div class="project-num">LAB_25</div>
+        <span class="project-cat cat-cloud">AI Security</span>
+        <h3 class="project-title">IoT / AI Security Platform</h3>
+        <div class="project-subtitle">🏭 Industrial IoT Defense</div>
+        <p class="project-desc">Industrial IoT security platform with digital twin simulation, explainable AI (XAI) anomaly detection, global orchestration and immersive VR/AR security training interfaces.</p>
+        <div class="project-tags">
+          <span class="tag">XAI</span><span class="tag">Digital Twin</span><span class="tag">IoT Security</span><span class="tag">VR/AR</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- Achievements -->
 <section id="achievements">
   <div class="section-inner">
@@ -1219,6 +1666,10 @@
             <span class="contact-link-icon">📞</span>
             <span class="contact-link-text">+228 98 24 67 88</span>
           </a>
+          <a href="https://github.com/H1v3-lab" target="_blank" class="contact-link">
+            <span class="contact-link-icon">🐙</span>
+            <span class="contact-link-text">github.com/H1v3-lab</span>
+          </a>
           <div class="contact-link" style="cursor:default;">
             <span class="contact-link-icon">📍</span>
             <span class="contact-link-text">Lomé, Togo</span>
@@ -1266,7 +1717,7 @@
   }
   animateCursor();
 
-  document.querySelectorAll('a, button, .skill-card, .project-card').forEach(el => {
+  document.querySelectorAll('a, button, .skill-card, .project-card, .filter-btn').forEach(el => {
     el.addEventListener('mouseenter', () => {
       cursor.style.transform = 'translate(-50%, -50%) scale(2)';
       cursorRing.style.width = '60px';
@@ -1294,6 +1745,57 @@
     el.style.transform = 'translateY(20px)';
     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     observer.observe(el);
+  });
+
+  // Mobile navigation
+  const burger = document.getElementById('navBurger');
+  const mobileNav = document.getElementById('mobileNav');
+
+  function closeMobileNav() {
+    burger.classList.remove('open');
+    mobileNav.classList.remove('open');
+    burger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+    burger.focus();
+  }
+
+  burger.addEventListener('click', () => {
+    const isOpen = burger.classList.toggle('open');
+    mobileNav.classList.toggle('open');
+    burger.setAttribute('aria-expanded', String(isOpen));
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+
+  // Close mobile nav when a link inside it is clicked
+  mobileNav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeMobileNav);
+  });
+
+  // Project filtering
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const labCards = document.querySelectorAll('#labGrid .project-card');
+  const countEl = document.getElementById('projectCount');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-pressed', 'false');
+      });
+      btn.classList.add('active');
+      btn.setAttribute('aria-pressed', 'true');
+
+      const filter = btn.dataset.filter;
+      let visible = 0;
+
+      labCards.forEach(card => {
+        const match = filter === 'all' || card.dataset.category === filter;
+        card.classList.toggle('hidden', !match);
+        if (match) visible++;
+      });
+
+      countEl.textContent = `// Showing ${visible} project${visible !== 1 ? 's' : ''}`;
+    });
   });
 </script>
 
