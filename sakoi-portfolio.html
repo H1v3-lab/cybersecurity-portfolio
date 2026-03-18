@@ -463,6 +463,31 @@
 
   .project-card:hover::after { opacity: 1; }
 
+  /* Clickable lab cards */
+  #labGrid .project-card {
+    cursor: none;
+    position: relative;
+  }
+
+  #labGrid .project-card .card-view-hint {
+    position: absolute;
+    bottom: 16px;
+    right: 20px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px;
+    color: var(--text-dim);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0;
+    transition: opacity 0.3s, color 0.3s;
+    pointer-events: none;
+  }
+
+  #labGrid .project-card:hover .card-view-hint {
+    opacity: 1;
+    color: var(--accent);
+  }
+
   .project-num {
     font-family: 'Share Tech Mono', monospace;
     font-size: 11px;
@@ -1246,7 +1271,7 @@
 
     <div class="projects-grid-full" id="labGrid">
 
-      <div class="project-card" data-category="network">
+      <div class="project-card" data-category="network" data-lab-id="01">
         <div class="project-num">LAB_01</div>
         <span class="project-cat cat-network">Network Security</span>
         <h3 class="project-title">Home Lab Setup</h3>
@@ -1255,9 +1280,10 @@
         <div class="project-tags">
           <span class="tag">VMware</span><span class="tag">Proxmox</span><span class="tag">pfSense</span><span class="tag">Kali Linux</span><span class="tag">VLANs</span>
         </div>
+        <span class="card-view-hint">View Details →</span>
       </div>
 
-      <div class="project-card" data-category="network">
+      <div class="project-card" data-category="network" data-lab-id="02">
         <div class="project-num">LAB_02</div>
         <span class="project-cat cat-network">Network Security</span>
         <h3 class="project-title">Firewall Configuration</h3>
@@ -1266,9 +1292,10 @@
         <div class="project-tags">
           <span class="tag">pfSense</span><span class="tag">FortiGate</span><span class="tag">Python</span><span class="tag">PCI-DSS</span>
         </div>
+        <span class="card-view-hint">View Details →</span>
       </div>
 
-      <div class="project-card" data-category="network">
+      <div class="project-card" data-category="network" data-lab-id="03">
         <div class="project-num">LAB_03</div>
         <span class="project-cat cat-network">Network Security</span>
         <h3 class="project-title">Wireshark Traffic Analysis</h3>
@@ -1277,9 +1304,10 @@
         <div class="project-tags">
           <span class="tag">Wireshark</span><span class="tag">Python</span><span class="tag">tcpdump</span><span class="tag">Tshark</span>
         </div>
+        <span class="card-view-hint">View Details →</span>
       </div>
 
-      <div class="project-card" data-category="network">
+      <div class="project-card" data-category="network" data-lab-id="04">
         <div class="project-num">LAB_04</div>
         <span class="project-cat cat-network">Network Security</span>
         <h3 class="project-title">IDS/IPS Implementation</h3>
@@ -1288,9 +1316,10 @@
         <div class="project-tags">
           <span class="tag">Snort</span><span class="tag">Suricata</span><span class="tag">SIEM</span><span class="tag">Docker</span>
         </div>
+        <span class="card-view-hint">View Details →</span>
       </div>
 
-      <div class="project-card" data-category="network">
+      <div class="project-card" data-category="network" data-lab-id="05">
         <div class="project-num">LAB_05</div>
         <span class="project-cat cat-network">Network Security</span>
         <h3 class="project-title">VPN Management System</h3>
@@ -1299,9 +1328,10 @@
         <div class="project-tags">
           <span class="tag">OpenVPN</span><span class="tag">IPSec</span><span class="tag">Ansible</span><span class="tag">PKI</span>
         </div>
+        <span class="card-view-hint">View Details →</span>
       </div>
 
-      <div class="project-card" data-category="network">
+      <div class="project-card" data-category="network" data-lab-id="06">
         <div class="project-num">LAB_06</div>
         <span class="project-cat cat-network">Network Security</span>
         <h3 class="project-title">Secure Network Design</h3>
@@ -1310,9 +1340,10 @@
         <div class="project-tags">
           <span class="tag">Zero Trust</span><span class="tag">VLAN</span><span class="tag">NAC</span><span class="tag">Terraform</span>
         </div>
+        <span class="card-view-hint">View Details →</span>
       </div>
 
-      <div class="project-card" data-category="network">
+      <div class="project-card" data-category="network" data-lab-id="07">
         <div class="project-num">LAB_07</div>
         <span class="project-cat cat-network">Network Security</span>
         <h3 class="project-title">Wireless Security</h3>
@@ -1321,9 +1352,10 @@
         <div class="project-tags">
           <span class="tag">WPA3</span><span class="tag">802.1X</span><span class="tag">RADIUS</span><span class="tag">WIDS</span>
         </div>
+        <span class="card-view-hint">View Details →</span>
       </div>
 
-      <div class="project-card" data-category="network">
+      <div class="project-card" data-category="network" data-lab-id="08">
         <div class="project-num">LAB_08</div>
         <span class="project-cat cat-network">Identity & Access</span>
         <h3 class="project-title">Identity & Access Management</h3>
@@ -1332,9 +1364,10 @@
         <div class="project-tags">
           <span class="tag">Active Directory</span><span class="tag">SAML 2.0</span><span class="tag">OAuth</span><span class="tag">MFA</span><span class="tag">Keycloak</span>
         </div>
+        <span class="card-view-hint">View Details →</span>
       </div>
 
-      <div class="project-card" data-category="cloud">
+      <div class="project-card" data-category="cloud" data-lab-id="09">
         <div class="project-num">LAB_09</div>
         <span class="project-cat cat-cloud">Cloud Security</span>
         <h3 class="project-title">Cloud Security Governance</h3>
@@ -1343,9 +1376,10 @@
         <div class="project-tags">
           <span class="tag">AWS</span><span class="tag">Azure</span><span class="tag">GCP</span><span class="tag">Terraform</span><span class="tag">CSPM</span>
         </div>
+        <span class="card-view-hint">View Details →</span>
       </div>
 
-      <div class="project-card" data-category="cloud">
+      <div class="project-card" data-category="cloud" data-lab-id="10">
         <div class="project-num">LAB_10</div>
         <span class="project-cat cat-cloud">Threat Intelligence</span>
         <h3 class="project-title">Threat Intelligence Platform</h3>
@@ -1354,9 +1388,10 @@
         <div class="project-tags">
           <span class="tag">STIX/TAXII</span><span class="tag">MISP</span><span class="tag">Python</span><span class="tag">ML</span><span class="tag">Elasticsearch</span>
         </div>
+        <span class="card-view-hint">View Details →</span>
       </div>
 
-      <div class="project-card" data-category="forensics">
+      <div class="project-card" data-category="forensics" data-lab-id="11">
         <div class="project-num">LAB_11</div>
         <span class="project-cat cat-forensics">Forensics</span>
         <h3 class="project-title">Malware Analysis Sandbox</h3>
@@ -1365,9 +1400,10 @@
         <div class="project-tags">
           <span class="tag green">Cuckoo</span><span class="tag green">YARA</span><span class="tag green">IDA Pro</span><span class="tag green">Docker</span>
         </div>
+        <span class="card-view-hint">View Details →</span>
       </div>
 
-      <div class="project-card" data-category="offensive">
+      <div class="project-card" data-category="offensive" data-lab-id="12">
         <div class="project-num">LAB_12</div>
         <span class="project-cat cat-offensive">Offensive Security</span>
         <h3 class="project-title">Penetration Testing Framework</h3>
@@ -1376,9 +1412,10 @@
         <div class="project-tags">
           <span class="tag red">Metasploit</span><span class="tag red">Nmap</span><span class="tag red">Burp Suite</span><span class="tag red">OWASP</span>
         </div>
+        <span class="card-view-hint">View Details →</span>
       </div>
 
-      <div class="project-card" data-category="web">
+      <div class="project-card" data-category="web" data-lab-id="13">
         <div class="project-num">LAB_13</div>
         <span class="project-cat cat-web">Web Security</span>
         <h3 class="project-title">Web Application Security</h3>
@@ -1387,9 +1424,10 @@
         <div class="project-tags">
           <span class="tag">OWASP Top 10</span><span class="tag">Burp Suite</span><span class="tag">SQLMap</span><span class="tag">ASVS</span>
         </div>
+        <span class="card-view-hint">View Details →</span>
       </div>
 
-      <div class="project-card" data-category="forensics">
+      <div class="project-card" data-category="forensics" data-lab-id="14">
         <div class="project-num">LAB_14</div>
         <span class="project-cat cat-forensics">Forensics & DFIR</span>
         <h3 class="project-title">Digital Forensics & IR</h3>
@@ -1398,9 +1436,10 @@
         <div class="project-tags">
           <span class="tag green">Autopsy</span><span class="tag green">Volatility</span><span class="tag green">Python</span><span class="tag green">NIST</span>
         </div>
+        <span class="card-view-hint">View Details →</span>
       </div>
 
-      <div class="project-card" data-category="offensive">
+      <div class="project-card" data-category="offensive" data-lab-id="15">
         <div class="project-num">LAB_15</div>
         <span class="project-cat cat-offensive">Offensive Security</span>
         <h3 class="project-title">Red Team Operations</h3>
@@ -1409,9 +1448,10 @@
         <div class="project-tags">
           <span class="tag red">C2 Framework</span><span class="tag red">MITRE ATT&CK</span><span class="tag red">OPSEC</span><span class="tag red">Python</span>
         </div>
+        <span class="card-view-hint">View Details →</span>
       </div>
 
-      <div class="project-card" data-category="offensive">
+      <div class="project-card" data-category="offensive" data-lab-id="16">
         <div class="project-num">LAB_16</div>
         <span class="project-cat cat-offensive">Offensive Security</span>
         <h3 class="project-title">Exploit Development</h3>
@@ -1420,9 +1460,10 @@
         <div class="project-tags">
           <span class="tag red">GDB/PWNDBG</span><span class="tag red">Python</span><span class="tag red">Assembly</span><span class="tag red">ROP Chains</span>
         </div>
+        <span class="card-view-hint">View Details →</span>
       </div>
 
-      <div class="project-card" data-category="offensive">
+      <div class="project-card" data-category="offensive" data-lab-id="17">
         <div class="project-num">LAB_17</div>
         <span class="project-cat cat-offensive">Offensive Security</span>
         <h3 class="project-title">Social Engineering Simulation</h3>
@@ -1431,9 +1472,10 @@
         <div class="project-tags">
           <span class="tag red">GoPhish</span><span class="tag red">SET</span><span class="tag red">OSINT</span><span class="tag red">Python</span>
         </div>
+        <span class="card-view-hint">View Details →</span>
       </div>
 
-      <div class="project-card" data-category="offensive">
+      <div class="project-card" data-category="offensive" data-lab-id="18">
         <div class="project-num">LAB_18</div>
         <span class="project-cat cat-offensive">Offensive Security</span>
         <h3 class="project-title">Password Cracking & Analysis</h3>
@@ -1442,9 +1484,10 @@
         <div class="project-tags">
           <span class="tag red">Hashcat</span><span class="tag red">John the Ripper</span><span class="tag red">GPU</span><span class="tag red">Python</span>
         </div>
+        <span class="card-view-hint">View Details →</span>
       </div>
 
-      <div class="project-card" data-category="forensics">
+      <div class="project-card" data-category="forensics" data-lab-id="19">
         <div class="project-num">LAB_19</div>
         <span class="project-cat cat-forensics">Forensics</span>
         <h3 class="project-title">Forensic Analysis Toolkit</h3>
@@ -1453,9 +1496,10 @@
         <div class="project-tags">
           <span class="tag green">Python</span><span class="tag green">Volatility</span><span class="tag green">NetworkMiner</span><span class="tag green">ELK</span>
         </div>
+        <span class="card-view-hint">View Details →</span>
       </div>
 
-      <div class="project-card" data-category="cloud">
+      <div class="project-card" data-category="cloud" data-lab-id="20">
         <div class="project-num">LAB_20</div>
         <span class="project-cat cat-cloud">Threat Intelligence</span>
         <h3 class="project-title">Threat Hunting SOC</h3>
@@ -1464,9 +1508,10 @@
         <div class="project-tags">
           <span class="tag">ELK Stack</span><span class="tag">Sigma Rules</span><span class="tag">ML</span><span class="tag">SOAR</span>
         </div>
+        <span class="card-view-hint">View Details →</span>
       </div>
 
-      <div class="project-card" data-category="cloud">
+      <div class="project-card" data-category="cloud" data-lab-id="21">
         <div class="project-num">LAB_21</div>
         <span class="project-cat cat-cloud">AI Security</span>
         <h3 class="project-title">AI-Powered Cybersecurity</h3>
@@ -1475,9 +1520,10 @@
         <div class="project-tags">
           <span class="tag">TensorFlow</span><span class="tag">NLP</span><span class="tag">Python</span><span class="tag">FastAPI</span>
         </div>
+        <span class="card-view-hint">View Details →</span>
       </div>
 
-      <div class="project-card" data-category="cloud">
+      <div class="project-card" data-category="cloud" data-lab-id="22">
         <div class="project-num">LAB_22</div>
         <span class="project-cat cat-cloud">Blockchain Security</span>
         <h3 class="project-title">Blockchain Security Forensics</h3>
@@ -1486,9 +1532,10 @@
         <div class="project-tags">
           <span class="tag">Web3</span><span class="tag">Ethereum</span><span class="tag">Python</span><span class="tag">Slither</span>
         </div>
+        <span class="card-view-hint">View Details →</span>
       </div>
 
-      <div class="project-card" data-category="web">
+      <div class="project-card" data-category="web" data-lab-id="23">
         <div class="project-num">LAB_23</div>
         <span class="project-cat cat-web">Web Security</span>
         <h3 class="project-title">Bug Bounty Platform</h3>
@@ -1497,9 +1544,10 @@
         <div class="project-tags">
           <span class="tag">Nuclei</span><span class="tag">Subfinder</span><span class="tag">OWASP ZAP</span><span class="tag">Docker</span>
         </div>
+        <span class="card-view-hint">View Details →</span>
       </div>
 
-      <div class="project-card" data-category="cloud">
+      <div class="project-card" data-category="cloud" data-lab-id="24">
         <div class="project-num">LAB_24</div>
         <span class="project-cat cat-cloud">DevSecOps</span>
         <h3 class="project-title">DevSecOps Pipeline Security</h3>
@@ -1508,9 +1556,10 @@
         <div class="project-tags">
           <span class="tag">Jenkins</span><span class="tag">GitLab CI</span><span class="tag">SAST/DAST</span><span class="tag">Kubernetes</span>
         </div>
+        <span class="card-view-hint">View Details →</span>
       </div>
 
-      <div class="project-card" data-category="cloud">
+      <div class="project-card" data-category="cloud" data-lab-id="25">
         <div class="project-num">LAB_25</div>
         <span class="project-cat cat-cloud">AI Security</span>
         <h3 class="project-title">IoT / AI Security Platform</h3>
@@ -1519,6 +1568,7 @@
         <div class="project-tags">
           <span class="tag">XAI</span><span class="tag">Digital Twin</span><span class="tag">IoT Security</span><span class="tag">VR/AR</span>
         </div>
+        <span class="card-view-hint">View Details →</span>
       </div>
 
     </div>
@@ -1795,6 +1845,15 @@
       });
 
       countEl.textContent = `// Showing ${visible} project${visible !== 1 ? 's' : ''}`;
+    });
+  });
+
+  // Lab card navigation
+  labCards.forEach(card => {
+    const labId = card.dataset.labId;
+    if (!labId) return;
+    card.addEventListener('click', () => {
+      window.location.href = `lab-detail.html?lab=${labId}`;
     });
   });
 </script>

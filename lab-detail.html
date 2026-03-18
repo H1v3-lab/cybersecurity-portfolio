@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lab Detail — DS Sakoi</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Syne:wght@400;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script>
+/* Lightweight Markdown renderer — covers headings, bold/italic,
+   code fences, inline code, lists, tables, blockquotes, links, HR */
+const marked = (function() {
+  function esc(s) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  function inlineEsc(s) {
+    // code spans first to protect their content
+    s = s.replace(/`([^`]+)`/g, (_,c) => `<code>${esc(c)}</code>`);
+    // bold + italic
+    s = s.replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>');
+    s = s.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+    s = s.replace(/__(.+?)__/g, '<strong>$1</strong>');
+    s = s.replace(/\*(.+?)\*/g, '<em>$1</em>');
+    s = s.replace(/_([^_]+)_/g, '<em>$1</em>');
+    // links
+    s = s.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+    return s;
+  }
+
+  function parse(md) {
+    const lines = md.split('\n');
+    let html = '';
+    let i = 0;
+
+    while (i < lines.length) {
+      const line = lines[i];
+
+      // Fenced code block
+      if (/^```/.test(line)) {
+        const lang = line.slice(3).trim();
+        i++;
+        let code = '';
+        while (i < lines.length && !/^```/.test(lines[i])) {
+          code += esc(lines[i]) + '\n';
+          i++;
+        }
+        html += `<pre><code class="language-${esc(lang)}">${code}</code></pre>`;
+        i++; // skip closing ```
+        continue;
+      }
+
+      // Horizontal rule
+      if (/^---+$|^\*\*\*+$|^___+$/.test(line.trim())) {
+        html += '<hr>';
+        i++;
+        continue;
+      }
+
+      // Headings
+      const hMatch = line.match(/^(#{1,6})\s+(.*)/);
+      if (hMatch) {
+        const level = hMatch[1].length;
+        html += `<h${level}>${inlineEsc(hMatch[2])}</h${level}>`;
+        i++;
+        continue;
+      }
+
+      // Blockquote
+      if (/^>\s?/.test(line)) {
+        let bq = '';
+        while (i < lines.length && /^>\s?/.test(lines[i])) {
+          bq += lines[i].replace(/^>\s?/, '') + '\n';
+          i++;
+        }
+        html += `<blockquote>${parse(bq)}</blockquote>`;
+        continue;
+      }
+
+      // Table (needs at least header + separator lines)
+      if (/\|/.test(line) && i + 1 < lines.length && /^\|?\s*[-:]+[-|\s:]*$/.test(lines[i + 1])) {
+        const rows = [];
+        while (i < lines.length && /\|/.test(lines[i])) {
+          rows.push(lines[i]);
+          i++;
+        }
+        // first row = header, second = separator, rest = body
+        const toCell = (r, tag) =>
+          r.replace(/^\||\|$/g,'').split('|')
+            .map(c => `<${tag}>${inlineEsc(c.trim())}</${tag}>`).join('');
+        html += '<table>';
+        html += `<thead><tr>${toCell(rows[0],'th')}</tr></thead>`;
+        if (rows.length > 2) {
+          html += '<tbody>';
+          for (let r = 2; r < rows.length; r++) {
+            html += `<tr>${toCell(rows[r],'td')}</tr>`;
+          }
+          html += '</tbody>';
+        }
+        html += '</table>';
+        continue;
+      }
+
+      // Unordered list
+      if (/^[-*+]\s/.test(line)) {
+        html += '<ul>';
+        while (i < lines.length && /^[-*+]\s/.test(lines[i])) {
+          html += `<li>${inlineEsc(lines[i].replace(/^[-*+]\s+/, ''))}</li>`;
+          i++;
+        }
+        html += '</ul>';
+        continue;
+      }
+
+      // Ordered list
+      if (/^\d+\.\s/.test(line)) {
+        html += '<ol>';
+        while (i < lines.length && /^\d+\.\s/.test(lines[i])) {
+          html += `<li>${inlineEsc(lines[i].replace(/^\d+\.\s+/, ''))}</li>`;
+          i++;
+        }
+        html += '</ol>';
+        continue;
+      }
+
+      // Empty line
+      if (line.trim() === '') {
+        i++;
+        continue;
+      }
+
+      // Paragraph
+      let para = '';
+      while (i < lines.length && lines[i].trim() !== '' &&
+             !/^#{1,6}\s/.test(lines[i]) && !/^[-*+]\s/.test(lines[i]) &&
+             !/^\d+\.\s/.test(lines[i]) && !/^>\s?/.test(lines[i]) &&
+             !/^```/.test(lines[i]) && !/^---+$|^\*\*\*+$|^___+$/.test(lines[i].trim()) &&
+             !/\|/.test(lines[i])) {
+        para += lines[i] + ' ';
+        i++;
+      }
+      if (para.trim()) {
+        html += `<p>${inlineEsc(para.trim())}</p>`;
+      }
+    }
+    return html;
+  }
+
+  return { parse };
+})();
+</script>
+<style>
+  :root {
+    --bg: #050a0e;
+    --bg2: #0a1520;
+    --bg3: #0f1e2e;
+    --accent: #00e5ff;
+    --accent2: #7fff00;
+    --accent3: #ff4d6d;
+    --text: #c8d8e8;
+    --text-dim: #6a8fa8;
+    --border: rgba(0,229,255,0.15);
+    --glow: 0 0 20px rgba(0,229,255,0.3);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    overflow-x: hidden;
+    cursor: none;
+    min-height: 100vh;
+  }
+
+  /* Custom cursor */
+  .cursor {
+    width: 12px; height: 12px;
+    background: var(--accent);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.1s, opacity 0.3s;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: screen;
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: transform 0.15s ease, width 0.2s, height 0.2s;
+    opacity: 0.5;
+  }
+
+  /* Scanlines overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.05) 2px, rgba(0,0,0,0.05) 4px);
+    pointer-events: none;
+    z-index: 9997;
+  }
+
+  /* Grid background */
+  .grid-bg {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image:
+      linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Nav */
+  nav {
+    position: fixed;
+    top: 0; width: 100%;
+    z-index: 100;
+    padding: 20px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(180deg, rgba(5,10,14,0.95) 0%, transparent 100%);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 14px;
+    color: var(--accent);
+    letter-spacing: 2px;
+    text-decoration: none;
+  }
+
+  .nav-back {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    text-decoration: none;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: color 0.3s;
+    cursor: none;
+  }
+  .nav-back:hover { color: var(--accent); }
+  .nav-back-arrow { font-size: 16px; transition: transform 0.3s; }
+  .nav-back:hover .nav-back-arrow { transform: translateX(-4px); }
+
+  /* Main content */
+  .detail-wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 120px 60px 80px;
+  }
+
+  /* Header */
+  .detail-header {
+    margin-bottom: 56px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 40px;
+  }
+
+  .detail-lab-num {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 12px;
+    color: var(--text-dim);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .detail-lab-num::before {
+    content: '';
+    width: 40px; height: 1px;
+    background: var(--accent);
+    display: block;
+  }
+
+  .detail-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: 12px;
+    letter-spacing: -1px;
+  }
+
+  .detail-subtitle {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .detail-meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .detail-cat {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px;
+    padding: 4px 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    display: inline-block;
+  }
+  .cat-network   { background: rgba(0,229,255,0.08);   border: 1px solid rgba(0,229,255,0.25);   color: var(--accent); }
+  .cat-offensive { background: rgba(255,77,109,0.08);  border: 1px solid rgba(255,77,109,0.25);  color: var(--accent3); }
+  .cat-forensics { background: rgba(127,255,0,0.08);   border: 1px solid rgba(127,255,0,0.25);   color: var(--accent2); }
+  .cat-cloud     { background: rgba(180,120,255,0.08); border: 1px solid rgba(180,120,255,0.25); color: #b47aff; }
+  .cat-web       { background: rgba(255,165,0,0.08);   border: 1px solid rgba(255,165,0,0.25);   color: #ffa500; }
+
+  /* Markdown content */
+  .detail-body {
+    font-size: 15px;
+    line-height: 1.9;
+    color: var(--text);
+  }
+
+  .detail-body h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #fff;
+    margin: 48px 0 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .detail-body h1:first-child { margin-top: 0; }
+
+  .detail-body h2 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin: 40px 0 16px;
+    padding-left: 16px;
+    border-left: 3px solid var(--accent);
+  }
+
+  .detail-body h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent2);
+    margin: 28px 0 12px;
+  }
+
+  .detail-body h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
+    margin: 20px 0 10px;
+  }
+
+  .detail-body p {
+    margin-bottom: 16px;
+    color: var(--text);
+  }
+
+  .detail-body ul, .detail-body ol {
+    margin: 0 0 16px 24px;
+  }
+
+  .detail-body li {
+    margin-bottom: 6px;
+    color: var(--text);
+  }
+
+  .detail-body li::marker { color: var(--accent); }
+
+  .detail-body strong {
+    color: #fff;
+    font-weight: 700;
+  }
+
+  .detail-body em {
+    color: var(--accent2);
+    font-style: normal;
+  }
+
+  .detail-body code {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.88em;
+    background: rgba(0,229,255,0.06);
+    border: 1px solid var(--border);
+    color: var(--accent2);
+    padding: 2px 6px;
+    border-radius: 2px;
+  }
+
+  .detail-body pre {
+    background: #020810;
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    padding: 20px 24px;
+    overflow-x: auto;
+    margin: 16px 0 24px;
+    position: relative;
+  }
+
+  .detail-body pre code {
+    background: none;
+    border: none;
+    color: var(--accent2);
+    font-size: 12px;
+    padding: 0;
+    line-height: 1.8;
+  }
+
+  .detail-body blockquote {
+    border-left: 3px solid var(--accent3);
+    padding-left: 20px;
+    margin: 20px 0;
+    color: var(--text-dim);
+    font-style: italic;
+  }
+
+  .detail-body table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0 28px;
+    font-size: 13px;
+  }
+
+  .detail-body th {
+    background: rgba(0,229,255,0.08);
+    border: 1px solid var(--border);
+    padding: 10px 16px;
+    text-align: left;
+    color: var(--accent);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .detail-body td {
+    border: 1px solid var(--border);
+    padding: 10px 16px;
+    color: var(--text);
+  }
+
+  .detail-body tr:hover td { background: rgba(0,229,255,0.03); }
+
+  .detail-body a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0,229,255,0.3);
+    transition: border-color 0.3s;
+  }
+  .detail-body a:hover { border-color: var(--accent); }
+
+  .detail-body hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 40px 0;
+  }
+
+  /* Loading / error states */
+  .detail-loading {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 13px;
+    color: var(--text-dim);
+    letter-spacing: 2px;
+    padding: 60px 0;
+    text-align: center;
+  }
+
+  .detail-loading::after {
+    content: '_';
+    animation: blink 1s step-end infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  .detail-error {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 13px;
+    color: var(--accent3);
+    padding: 24px;
+    border: 1px solid rgba(255,77,109,0.3);
+    background: rgba(255,77,109,0.05);
+  }
+
+  /* Footer / GitHub link */
+  .detail-footer {
+    margin-top: 64px;
+    padding-top: 40px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .btn-github {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 32px;
+    background: transparent;
+    color: var(--accent);
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid var(--accent);
+    cursor: none;
+    transition: all 0.3s;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  }
+  .btn-github:hover {
+    background: rgba(0,229,255,0.1);
+    box-shadow: var(--glow);
+  }
+  .btn-github svg { flex-shrink: 0; }
+
+  .btn-back-bottom {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 32px;
+    background: var(--accent);
+    color: var(--bg);
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    cursor: none;
+    transition: all 0.3s;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  }
+  .btn-back-bottom:hover { box-shadow: var(--glow); }
+
+  /* Page footer */
+  .page-footer {
+    padding: 32px 60px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 12px;
+    color: var(--text-dim);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    nav { padding: 20px 24px; }
+    .detail-wrap { padding: 100px 24px 60px; }
+    .page-footer { padding: 24px; flex-direction: column; gap: 12px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="grid-bg"></div>
+
+<!-- Navigation -->
+<nav>
+  <a href="sakoi-portfolio.html" class="nav-logo">&lt;DS_SAKOI/&gt;</a>
+  <a href="sakoi-portfolio.html#lab-portfolio" class="nav-back">
+    <span class="nav-back-arrow">←</span>
+    <span>Back to Labs</span>
+  </a>
+</nav>
+
+<!-- Main -->
+<div class="detail-wrap">
+
+  <div class="detail-header" id="detailHeader">
+    <div class="detail-loading">// Loading project data</div>
+  </div>
+
+  <div class="detail-body" id="detailBody">
+  </div>
+
+  <div class="detail-footer" id="detailFooter" style="display:none;">
+    <a href="sakoi-portfolio.html#lab-portfolio" class="btn-back-bottom">← All Labs</a>
+    <a id="githubLink" href="#" target="_blank" rel="noopener noreferrer" class="btn-github">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+      View on GitHub
+    </a>
+  </div>
+
+</div>
+
+<footer class="page-footer">
+  <span>&lt;DS_SAKOI/&gt; — Cybersecurity Engineer</span>
+  <span>© 2025 · All rights reserved</span>
+</footer>
+
+<script>
+  // ── Custom cursor ──────────────────────────────────────────────
+  const cursor = document.getElementById('cursor');
+  const cursorRing = document.getElementById('cursorRing');
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top  = e.clientY + 'px';
+    cursorRing.style.left = e.clientX + 'px';
+    cursorRing.style.top  = e.clientY + 'px';
+  });
+  document.addEventListener('mousedown', () => cursor.style.transform = 'translate(-50%,-50%) scale(0.6)');
+  document.addEventListener('mouseup',   () => cursor.style.transform = 'translate(-50%,-50%) scale(1)');
+
+  // ── Project map ────────────────────────────────────────────────
+  const PROJECTS = {
+    '01': {
+      folder:   '01-home-lab-setup',
+      title:    'Home Lab Setup',
+      subtitle: '🏠 Virtualized Cyber Lab',
+      cat:      'network',
+      catLabel: 'Network Security'
+    },
+    '02': {
+      folder:   '02-firewall-configuration',
+      title:    'Firewall Configuration',
+      subtitle: '🔥 Enterprise Perimeter Defense',
+      cat:      'network',
+      catLabel: 'Network Security'
+    },
+    '03': {
+      folder:   '03-analyse-trafic-wireshark',
+      title:    'Wireshark Traffic Analysis',
+      subtitle: '📡 Network Forensics Lab',
+      cat:      'network',
+      catLabel: 'Network Security'
+    },
+    '04': {
+      folder:   '04-ids-ips-implementation',
+      title:    'IDS/IPS Implementation',
+      subtitle: '🛡️ Multilayer Intrusion Detection',
+      cat:      'network',
+      catLabel: 'Network Security'
+    },
+    '05': {
+      folder:   '05-vpn-management',
+      title:    'VPN Management System',
+      subtitle: '🔐 Enterprise VPN Infrastructure',
+      cat:      'network',
+      catLabel: 'Network Security'
+    },
+    '06': {
+      folder:   '06-secure-network-design',
+      title:    'Secure Network Design',
+      subtitle: '⬡ Zero Trust Architecture',
+      cat:      'network',
+      catLabel: 'Network Security'
+    },
+    '07': {
+      folder:   '07-wireless-security',
+      title:    'Wireless Security',
+      subtitle: '📡 WPA3 Enterprise Deployment',
+      cat:      'network',
+      catLabel: 'Network Security'
+    },
+    '08': {
+      folder:   '08-identity-access-management',
+      title:    'Identity & Access Management',
+      subtitle: '🪪 Zero Trust IAM Platform',
+      cat:      'network',
+      catLabel: 'Identity & Access'
+    },
+    '09': {
+      folder:   '09-cloud-security-governance',
+      title:    'Cloud Security Governance',
+      subtitle: '☁ Multi-Cloud CSPM',
+      cat:      'cloud',
+      catLabel: 'Cloud Security'
+    },
+    '10': {
+      folder:   '10-threat-intelligence-platform',
+      title:    'Threat Intelligence Platform',
+      subtitle: '🎯 CTI Aggregation & Analysis',
+      cat:      'cloud',
+      catLabel: 'Threat Intelligence'
+    },
+    '11': {
+      folder:   '11-malware-analysis-sandbox',
+      title:    'Malware Analysis Sandbox',
+      subtitle: '🦠 Behavioral Analysis Lab',
+      cat:      'forensics',
+      catLabel: 'Forensics'
+    },
+    '12': {
+      folder:   '12-penetration-testing-framework',
+      title:    'Penetration Testing Framework',
+      subtitle: '⚔ OWASP/PTES Methodology',
+      cat:      'offensive',
+      catLabel: 'Offensive Security'
+    },
+    '13': {
+      folder:   '13-web-application-security',
+      title:    'Web Application Security',
+      subtitle: '🌐 OWASP Top 10 Testing',
+      cat:      'web',
+      catLabel: 'Web Security'
+    },
+    '14': {
+      folder:   '14-digital-forensics-incident-response',
+      title:    'Digital Forensics & IR',
+      subtitle: '🔬 NIST/SANS DFIR Framework',
+      cat:      'forensics',
+      catLabel: 'Forensics & DFIR'
+    },
+    '15': {
+      folder:   '15-red-team-operations',
+      title:    'Red Team Operations',
+      subtitle: '🎭 APT Simulation Framework',
+      cat:      'offensive',
+      catLabel: 'Offensive Security'
+    },
+    '16': {
+      folder:   '16-exploit-development',
+      title:    'Exploit Development',
+      subtitle: '💥 Binary Exploitation Lab',
+      cat:      'offensive',
+      catLabel: 'Offensive Security'
+    },
+    '17': {
+      folder:   '17-social-engineering-simulation',
+      title:    'Social Engineering Simulation',
+      subtitle: '🎣 Human Vulnerability Testing',
+      cat:      'offensive',
+      catLabel: 'Offensive Security'
+    },
+    '18': {
+      folder:   '18-password-cracking',
+      title:    'Password Cracking & Analysis',
+      subtitle: '🔑 Credential Security Audit',
+      cat:      'offensive',
+      catLabel: 'Offensive Security'
+    },
+    '19': {
+      folder:   '19-forensic-analysis-toolkit',
+      title:    'Forensic Analysis Toolkit',
+      subtitle: '🔍 Multi-Vector Investigation Suite',
+      cat:      'forensics',
+      catLabel: 'Forensics'
+    },
+    '20': {
+      folder:   '20-threat-hunting-soc',
+      title:    'Threat Hunting SOC',
+      subtitle: '🎯 Proactive APT Detection',
+      cat:      'cloud',
+      catLabel: 'Threat Intelligence'
+    },
+    '21': {
+      folder:   '21-ai-powered-cybersecurity',
+      title:    'AI-Powered Cybersecurity',
+      subtitle: '🤖 ML Threat Detection Platform',
+      cat:      'cloud',
+      catLabel: 'AI Security'
+    },
+    '22': {
+      folder:   '22-blockchain-security-forensics',
+      title:    'Blockchain Security Forensics',
+      subtitle: '🔗 Crypto Investigation Platform',
+      cat:      'cloud',
+      catLabel: 'Blockchain Security'
+    },
+    '23': {
+      folder:   '23-bug-bounty-platform',
+      title:    'Bug Bounty Platform',
+      subtitle: '🐛 Automated Vuln Discovery',
+      cat:      'web',
+      catLabel: 'Web Security'
+    },
+    '24': {
+      folder:   '24-devsecops-pipeline-security',
+      title:    'DevSecOps Pipeline Security',
+      subtitle: '🔄 Shift-Left Security CI/CD',
+      cat:      'cloud',
+      catLabel: 'DevSecOps'
+    },
+    '25': {
+      folder:   '25-station-traffeyere-iot-ai-platform',
+      title:    'IoT / AI Security Platform',
+      subtitle: '🏭 Industrial IoT Defense',
+      cat:      'cloud',
+      catLabel: 'AI Security'
+    }
+  };
+
+  const GITHUB_BASE = 'https://github.com/H1v3-lab/cybersecurity-portfolio/tree/main/projects/';
+
+  // ── Resolve lab ID from URL ────────────────────────────────────
+  function getLabId() {
+    const params = new URLSearchParams(window.location.search);
+    const raw = params.get('lab') || '';
+    // Accept only 1-2 digit numeric values (01–25)
+    const id = /^\d{1,2}$/.test(raw.trim()) ? raw.trim().padStart(2, '0') : null;
+    return id && id in PROJECTS ? id : null;
+  }
+
+  // ── Render header ──────────────────────────────────────────────
+  function renderHeader(id, project) {
+    const header = document.getElementById('detailHeader');
+    header.innerHTML = `
+      <div class="detail-lab-num">LAB_${id}</div>
+      <h1 class="detail-title">${escHtml(project.title)}</h1>
+      <div class="detail-subtitle">${escHtml(project.subtitle)}</div>
+      <div class="detail-meta">
+        <span class="detail-cat cat-${project.cat}">${escHtml(project.catLabel)}</span>
+      </div>
+    `;
+  }
+
+  // ── Render error ───────────────────────────────────────────────
+  function renderError(msg) {
+    document.getElementById('detailHeader').innerHTML =
+      `<div class="detail-error">// ERROR: ${escHtml(msg)}</div>`;
+  }
+
+  // ── Minimal HTML escape ────────────────────────────────────────
+  function escHtml(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  // ── Initialise ─────────────────────────────────────────────────
+  async function init() {
+    const id = getLabId();
+
+    if (!id) {
+      renderError('Unknown lab ID. Please return to the portfolio.');
+      return;
+    }
+
+    const project = PROJECTS[id];
+    renderHeader(id, project);
+
+    // Set GitHub link
+    const ghLink = document.getElementById('githubLink');
+    ghLink.href = GITHUB_BASE + project.folder;
+
+    // Fetch README
+    const readmeUrl = `projects/${project.folder}/README.md`;
+    try {
+      const res = await fetch(readmeUrl);
+      if (!res.ok) throw new Error(`README not found (HTTP ${res.status})`);
+      const mdText = await res.text();
+
+      const bodyEl = document.getElementById('detailBody');
+      bodyEl.innerHTML = marked.parse(mdText);
+
+      // Make all links inside markdown open in new tab
+      bodyEl.querySelectorAll('a').forEach(a => {
+        if (a.hostname && a.hostname !== window.location.hostname) {
+          a.setAttribute('target', '_blank');
+          a.setAttribute('rel', 'noopener noreferrer');
+        }
+      });
+
+      document.getElementById('detailFooter').style.display = 'flex';
+    } catch (err) {
+      document.getElementById('detailBody').innerHTML =
+        `<div class="detail-error">// Could not load project documentation: ${escHtml(err.message)}</div>`;
+      document.getElementById('detailFooter').style.display = 'flex';
+    }
+  }
+
+  init();
+</script>
+
+</body>
+</html>
