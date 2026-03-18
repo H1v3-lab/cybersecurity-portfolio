@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dominique-Savio Sakoi — Cybersecurity Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Syne:wght@400;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #050a0e;
+    --bg2: #0a1520;
+    --bg3: #0f1e2e;
+    --accent: #00e5ff;
+    --accent2: #7fff00;
+    --accent3: #ff4d6d;
+    --text: #c8d8e8;
+    --text-dim: #6a8fa8;
+    --border: rgba(0,229,255,0.15);
+    --glow: 0 0 20px rgba(0,229,255,0.3);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom cursor */
+  .cursor {
+    width: 12px; height: 12px;
+    background: var(--accent);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.1s, opacity 0.3s;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: screen;
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: transform 0.15s ease, width 0.2s, height 0.2s;
+    opacity: 0.5;
+  }
+
+  /* Scanlines overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.05) 2px, rgba(0,0,0,0.05) 4px);
+    pointer-events: none;
+    z-index: 9997;
+  }
+
+  /* Grid background */
+  .grid-bg {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image:
+      linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Nav */
+  nav {
+    position: fixed;
+    top: 0; width: 100%;
+    z-index: 100;
+    padding: 20px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(180deg, rgba(5,10,14,0.95) 0%, transparent 100%);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 14px;
+    color: var(--accent);
+    letter-spacing: 2px;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    text-decoration: none;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: color 0.3s;
+    position: relative;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0;
+    width: 0; height: 1px;
+    background: var(--accent);
+    transition: width 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+  .nav-links a:hover::after { width: 100%; }
+
+  /* Sections */
+  section { position: relative; z-index: 1; }
+
+  /* Hero */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 120px 60px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-content { max-width: 800px; }
+
+  .hero-tag {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hero-tag::before {
+    content: '';
+    width: 40px; height: 1px;
+    background: var(--accent);
+    display: block;
+  }
+
+  .hero-name {
+    font-size: clamp(3rem, 7vw, 6rem);
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 16px;
+    letter-spacing: -2px;
+  }
+
+  .hero-name span {
+    color: var(--accent);
+    position: relative;
+  }
+
+  .hero-name span::after {
+    content: attr(data-text);
+    position: absolute;
+    left: 2px; top: 2px;
+    color: var(--accent3);
+    opacity: 0.3;
+    z-index: -1;
+  }
+
+  .hero-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 14px;
+    color: var(--text-dim);
+    letter-spacing: 3px;
+    margin-bottom: 32px;
+    text-transform: uppercase;
+  }
+
+  .hero-bio {
+    font-size: 17px;
+    line-height: 1.8;
+    color: var(--text);
+    max-width: 600px;
+    margin-bottom: 48px;
+    border-left: 2px solid var(--accent);
+    padding-left: 24px;
+  }
+
+  .hero-bio em {
+    color: var(--accent2);
+    font-style: normal;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    padding: 14px 32px;
+    background: var(--accent);
+    color: var(--bg);
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    cursor: none;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  }
+
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: rgba(255,255,255,0.2);
+    transition: left 0.4s;
+  }
+
+  .btn-primary:hover::before { left: 100%; }
+  .btn-primary:hover { box-shadow: var(--glow); }
+
+  .btn-secondary {
+    padding: 14px 32px;
+    background: transparent;
+    color: var(--accent);
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid var(--accent);
+    cursor: none;
+    transition: all 0.3s;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  }
+
+  .btn-secondary:hover {
+    background: rgba(0,229,255,0.1);
+    box-shadow: var(--glow);
+  }
+
+  /* Hero decoration */
+  .hero-visual {
+    position: absolute;
+    right: 60px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 400px;
+    height: 400px;
+    opacity: 0.15;
+  }
+
+  .hero-visual svg { width: 100%; height: 100%; }
+
+  /* Stats bar */
+  .stats-bar {
+    display: flex;
+    gap: 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin: 0 60px;
+    overflow: hidden;
+  }
+
+  .stat-item {
+    flex: 1;
+    padding: 28px 32px;
+    border-right: 1px solid var(--border);
+    position: relative;
+    transition: background 0.3s;
+  }
+
+  .stat-item:last-child { border-right: none; }
+
+  .stat-item:hover { background: rgba(0,229,255,0.04); }
+
+  .stat-number {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 2.4rem;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: 'Space Mono', monospace;
+  }
+
+  /* Section shared */
+  .section-inner {
+    padding: 100px 60px;
+  }
+
+  .section-tag {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-tag::before {
+    content: '//';
+    opacity: 0.5;
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin-bottom: 60px;
+    line-height: 1.1;
+  }
+
+  .section-title span { color: var(--accent); }
+
+  /* Skills */
+  #skills { background: var(--bg2); }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .skill-card {
+    background: var(--bg2);
+    padding: 40px 32px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+
+  .skill-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 0;
+    background: var(--accent);
+    transition: height 0.4s;
+  }
+
+  .skill-card:hover { background: var(--bg3); }
+  .skill-card:hover::before { height: 100%; }
+
+  .skill-icon {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  .skill-name {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #fff;
+  }
+
+  .skill-desc {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .tag {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    padding: 4px 10px;
+    background: rgba(0,229,255,0.08);
+    border: 1px solid rgba(0,229,255,0.2);
+    color: var(--accent);
+    letter-spacing: 1px;
+  }
+
+  .tag.green {
+    background: rgba(127,255,0,0.08);
+    border-color: rgba(127,255,0,0.2);
+    color: var(--accent2);
+  }
+
+  .tag.red {
+    background: rgba(255,77,109,0.08);
+    border-color: rgba(255,77,109,0.2);
+    color: var(--accent3);
+  }
+
+  /* Projects */
+  #projects { background: var(--bg); }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .project-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+
+  .project-card::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 0; height: 0;
+    border-style: solid;
+    border-width: 0 30px 30px 0;
+    border-color: transparent var(--accent) transparent transparent;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .project-card:hover {
+    border-color: rgba(0,229,255,0.4);
+    transform: translateY(-4px);
+  }
+
+  .project-card:hover::after { opacity: 1; }
+
+  .project-num {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 3px;
+    margin-bottom: 16px;
+  }
+
+  .project-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+
+  .project-subtitle {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .project-desc {
+    font-size: 14px;
+    color: var(--text-dim);
+    line-height: 1.8;
+    margin-bottom: 24px;
+  }
+
+  .project-highlights {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .project-highlights li {
+    font-size: 13px;
+    color: var(--text);
+    padding-left: 20px;
+    position: relative;
+    line-height: 1.6;
+  }
+
+  .project-highlights li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+  }
+
+  .code-snippet {
+    background: #020810;
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent2);
+    padding: 16px 20px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 12px;
+    color: var(--accent2);
+    margin-top: 20px;
+    line-height: 1.8;
+    overflow-x: auto;
+  }
+
+  .code-snippet .comment { color: var(--text-dim); }
+  .code-snippet .keyword { color: var(--accent3); }
+  .code-snippet .string { color: var(--accent); }
+
+  /* CTF / Achievements */
+  #achievements { background: var(--bg2); }
+
+  .achievements-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+
+  .achievement-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    padding: 32px;
+    position: relative;
+  }
+
+  .achievement-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(127,255,0,0.1);
+    border: 1px solid rgba(127,255,0,0.3);
+    padding: 8px 16px;
+    margin-bottom: 20px;
+  }
+
+  .achievement-badge span {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--accent2);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .achievement-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 10px;
+  }
+
+  .achievement-detail {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+
+  .callout {
+    background: rgba(0,229,255,0.05);
+    border: 1px solid rgba(0,229,255,0.2);
+    padding: 24px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .callout-icon { font-size: 24px; flex-shrink: 0; }
+
+  .callout-text {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.8;
+    font-style: italic;
+  }
+
+  /* Certifications */
+  #certifications { background: var(--bg); }
+
+  .cert-timeline {
+    position: relative;
+    padding-left: 32px;
+  }
+
+  .cert-timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(180deg, var(--accent), transparent);
+  }
+
+  .cert-item {
+    position: relative;
+    padding: 0 0 40px 40px;
+  }
+
+  .cert-item::before {
+    content: '';
+    position: absolute;
+    left: -5px; top: 6px;
+    width: 11px; height: 11px;
+    background: var(--accent);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--accent);
+  }
+
+  .cert-item.future::before {
+    background: transparent;
+    border: 1px solid var(--text-dim);
+    box-shadow: none;
+  }
+
+  .cert-date {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+  }
+
+  .cert-item.future .cert-date { color: var(--text-dim); }
+
+  .cert-name {
+    font-size: 17px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+
+  .cert-item.future .cert-name { color: var(--text-dim); }
+
+  .cert-issuer {
+    font-size: 12px;
+    color: var(--text-dim);
+    font-family: 'Space Mono', monospace;
+  }
+
+  .cert-status {
+    display: inline-block;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    padding: 3px 10px;
+    border: 1px solid;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 8px;
+  }
+
+  .status-done { border-color: var(--accent2); color: var(--accent2); background: rgba(127,255,0,0.05); }
+  .status-progress { border-color: var(--accent); color: var(--accent); background: rgba(0,229,255,0.05); animation: pulse 2s infinite; }
+  .status-planned { border-color: var(--text-dim); color: var(--text-dim); }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+
+  /* Contact */
+  #contact { background: var(--bg2); }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+
+  .contact-intro {
+    font-size: 17px;
+    line-height: 1.8;
+    color: var(--text);
+    margin-bottom: 40px;
+  }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    text-decoration: none;
+    color: var(--text);
+    transition: all 0.3s;
+  }
+
+  .contact-link:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(0,229,255,0.05);
+  }
+
+  .contact-link-icon {
+    font-size: 18px;
+    width: 32px;
+    text-align: center;
+  }
+
+  .contact-link-text { font-size: 14px; font-family: 'Space Mono', monospace; }
+
+  .icdfa-callout {
+    background: linear-gradient(135deg, rgba(0,229,255,0.05), rgba(127,255,0,0.05));
+    border: 1px solid rgba(0,229,255,0.3);
+    padding: 40px;
+  }
+
+  .icdfa-callout h3 {
+    font-size: 22px;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 16px;
+  }
+
+  .icdfa-callout p {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.8;
+    margin-bottom: 24px;
+  }
+
+  .icdfa-grade {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 13px;
+    color: var(--accent2);
+    letter-spacing: 2px;
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  /* Footer */
+  footer {
+    padding: 40px 60px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 12px;
+    color: var(--text-dim);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Animations */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes glitch {
+    0%, 100% { clip-path: inset(0 0 98% 0); transform: translate(-3px, 0); }
+    20% { clip-path: inset(30% 0 50% 0); transform: translate(3px, 0); }
+    40% { clip-path: inset(60% 0 20% 0); transform: translate(-1px, 0); }
+    60% { clip-path: inset(10% 0 80% 0); transform: translate(2px, 0); }
+    80% { clip-path: inset(80% 0 5% 0); transform: translate(-2px, 0); }
+  }
+
+  .hero-name {
+    animation: fadeInUp 0.8s ease both;
+  }
+
+  .hero-tag { animation: fadeInUp 0.8s ease 0.1s both; }
+  .hero-title { animation: fadeInUp 0.8s ease 0.2s both; }
+  .hero-bio { animation: fadeInUp 0.8s ease 0.3s both; }
+  .hero-actions { animation: fadeInUp 0.8s ease 0.4s both; }
+
+  /* Glitch text effect */
+  .glitch {
+    position: relative;
+  }
+
+  .glitch::before, .glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    color: var(--accent);
+  }
+
+  .glitch::before {
+    animation: glitch 3s infinite;
+    color: var(--accent3);
+    opacity: 0.6;
+  }
+
+  .glitch::after {
+    animation: glitch 3s infinite 0.05s reverse;
+    color: var(--accent);
+    opacity: 0.4;
+  }
+
+  /* Terminal blinking cursor */
+  .blink {
+    animation: blink 1s step-end infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    nav { padding: 20px 24px; }
+    .nav-links { display: none; }
+    #hero, .section-inner { padding-left: 24px; padding-right: 24px; }
+    .stats-bar { margin: 0 24px; flex-wrap: wrap; }
+    .skills-grid, .projects-grid, .achievements-layout, .contact-grid { grid-template-columns: 1fr; }
+    .hero-visual { display: none; }
+    footer { padding: 24px; flex-direction: column; gap: 12px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="grid-bg"></div>
+
+<!-- Navigation -->
+<nav>
+  <div class="nav-logo">&lt;DS_SAKOI/&gt;</div>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#achievements">CTF</a></li>
+    <li><a href="#certifications">Certs</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<section id="hero">
+  <div class="hero-content">
+    <div class="hero-tag">Associate Member Candidate · ICDFA 2026</div>
+    <h1 class="hero-name">
+      <span data-text="Dominique-Savio" class="glitch">Dominique-Savio</span><br>
+      Sakoi
+    </h1>
+    <p class="hero-title">Cybersecurity Engineer &nbsp;·&nbsp; CTF Finalist &nbsp;·&nbsp; Pentest Specialist<span class="blink">_</span></p>
+    <p class="hero-bio">
+      I break systems <em>professionally</em> — then fix them better than they were. Third-year cybersecurity student and junior security engineer who finds elegance in a clean exploit chain and <em>sleeps soundly knowing firewalls are watching</em>. Currently defending networks at Miabé Innovation while studying full-time at IPNET. Introvert by nature, loud by exploit.
+    </p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn-primary">View Projects</a>
+      <a href="https://www.linkedin.com/in/dominique-savio-sakoi-b607b333a" target="_blank" class="btn-secondary">LinkedIn Profile</a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="200" cy="200" r="180" stroke="#00e5ff" stroke-width="0.5" opacity="0.5"/>
+      <circle cx="200" cy="200" r="140" stroke="#00e5ff" stroke-width="0.5" opacity="0.4"/>
+      <circle cx="200" cy="200" r="100" stroke="#00e5ff" stroke-width="0.5" opacity="0.3"/>
+      <circle cx="200" cy="200" r="60" stroke="#7fff00" stroke-width="1" opacity="0.6"/>
+      <line x1="200" y1="20" x2="200" y2="380" stroke="#00e5ff" stroke-width="0.3" opacity="0.3"/>
+      <line x1="20" y1="200" x2="380" y2="200" stroke="#00e5ff" stroke-width="0.3" opacity="0.3"/>
+      <line x1="72" y1="72" x2="328" y2="328" stroke="#00e5ff" stroke-width="0.3" opacity="0.2"/>
+      <line x1="328" y1="72" x2="72" y2="328" stroke="#00e5ff" stroke-width="0.3" opacity="0.2"/>
+      <polygon points="200,130 240,180 220,240 180,240 160,180" stroke="#7fff00" stroke-width="1" fill="none" opacity="0.8"/>
+      <circle cx="200" cy="200" r="8" fill="#00e5ff" opacity="0.8"/>
+      <circle cx="200" cy="20" r="4" fill="#00e5ff" opacity="0.6"/>
+      <circle cx="200" cy="380" r="4" fill="#00e5ff" opacity="0.6"/>
+      <circle cx="20" cy="200" r="4" fill="#00e5ff" opacity="0.6"/>
+      <circle cx="380" cy="200" r="4" fill="#00e5ff" opacity="0.6"/>
+    </svg>
+  </div>
+</section>
+
+<!-- Stats Bar -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="stat-number">2×</div>
+    <div class="stat-label">CTF Finalist · ANCy</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">5+</div>
+    <div class="stat-label">Certifications</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">3+</div>
+    <div class="stat-label">Years in Cybersecurity</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">CAPT</div>
+    <div class="stat-label">Certified Pentest Associate</div>
+  </div>
+</div>
+
+<!-- Skills -->
+<section id="skills">
+  <div class="section-inner">
+    <div class="section-tag">Core Competencies</div>
+    <h2 class="section-title">What I <span>Do</span></h2>
+    <div class="skills-grid">
+
+      <div class="skill-card">
+        <span class="skill-icon">🔴</span>
+        <div class="skill-name">Penetration Testing</div>
+        <div class="skill-desc">Methodical offensive security — from reconnaissance to post-exploitation. I find the holes before the adversaries do.</div>
+        <div class="skill-tags">
+          <span class="tag red">Kali Linux</span>
+          <span class="tag red">Metasploit</span>
+          <span class="tag red">Burp Suite</span>
+          <span class="tag red">Nmap</span>
+          <span class="tag red">OWASP ZAP</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <span class="skill-icon">🔵</span>
+        <div class="skill-name">Network Defense</div>
+        <div class="skill-desc">UTM deployment, firewall architecture, IDS/IPS configuration and VPN tunneling. Perimeter security that actually holds.</div>
+        <div class="skill-tags">
+          <span class="tag">FortiGate</span>
+          <span class="tag">OPNsense</span>
+          <span class="tag">IDS/IPS</span>
+          <span class="tag">VPN</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <span class="skill-icon">🟢</span>
+        <div class="skill-name">SOC & Threat Monitoring</div>
+        <div class="skill-desc">Proactive threat detection, SIEM workflows, log analysis. Because the best incident is the one you stopped before it started.</div>
+        <div class="skill-tags">
+          <span class="tag green">SIEM</span>
+          <span class="tag green">Wireshark</span>
+          <span class="tag green">Nessus</span>
+          <span class="tag green">OpenVAS</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <span class="skill-icon">🪪</span>
+        <div class="skill-name">Identity & Access Mgmt</div>
+        <div class="skill-desc">Active Directory hardening, GPO enforcement, privilege management. I've both attacked and defended AD forests — perspective matters.</div>
+        <div class="skill-tags">
+          <span class="tag">Active Directory</span>
+          <span class="tag">GPO</span>
+          <span class="tag">IAM</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <span class="skill-icon">🐧</span>
+        <div class="skill-name">Systems Administration</div>
+        <div class="skill-desc">Linux/Windows server hardening, virtualization with VMware and Proxmox, scripting with Python for security automation.</div>
+        <div class="skill-tags">
+          <span class="tag green">Linux</span>
+          <span class="tag green">Windows Server</span>
+          <span class="tag green">VMware</span>
+          <span class="tag green">Python</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <span class="skill-icon">📋</span>
+        <div class="skill-name">Governance & Reporting</div>
+        <div class="skill-desc">Technical audit reports, security policy drafting, risk mitigation frameworks and team awareness training. Strategy meets execution.</div>
+        <div class="skill-tags">
+          <span class="tag">Audit Reports</span>
+          <span class="tag">Risk Management</span>
+          <span class="tag">Security Policy</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Projects -->
+<section id="projects">
+  <div class="section-inner">
+    <div class="section-tag">Featured Projects</div>
+    <h2 class="section-title">Work That <span>Matters</span></h2>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-num">PROJECT_01</div>
+        <h3 class="project-title">Cyber-Système Nerveux Central</h3>
+        <div class="project-subtitle">🧠 Autonomous Defense Platform</div>
+        <p class="project-desc">An immersive, autonomous cyber defense platform designed as a "central nervous system" for enterprise infrastructure — detecting, classifying and responding to threats in real time without constant human intervention.</p>
+        <ul class="project-highlights">
+          <li>Architected a multi-layer detection engine combining behavioral analysis and signature-based rules</li>
+          <li>Integrated automated incident response playbooks for common threat vectors</li>
+          <li>Built real-time threat visualization dashboard for SOC analyst workflow</li>
+          <li>Designed with scalability in mind: modular architecture for custom threat intel feeds</li>
+        </ul>
+        <div class="code-snippet">
+          <span class="comment"># Autonomous threat classification engine</span><br>
+          <span class="keyword">def</span> classify_threat(event_data):<br>
+          &nbsp;&nbsp;score = behavioral_analysis(event_data)<br>
+          &nbsp;&nbsp;<span class="keyword">if</span> score &gt; <span class="string">CRITICAL_THRESHOLD</span>:<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> trigger_response(<span class="string">"isolate"</span>)
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-num">PROJECT_02</div>
+        <h3 class="project-title">Active Directory Fortress</h3>
+        <div class="project-subtitle">🏛️ Full Infrastructure Hardening</div>
+        <p class="project-desc">End-to-end design, deployment and security testing of an enterprise Active Directory infrastructure — from initial forest architecture through attack simulation and remediation.</p>
+        <ul class="project-highlights">
+          <li>Designed complete AD forest with domain structure, OU hierarchy and trust relationships</li>
+          <li>Implemented 40+ Group Policy Objects covering workstation hardening and access controls</li>
+          <li>Conducted internal pentest: enumeration, Kerberoasting simulation, privilege escalation paths</li>
+          <li>Produced full audit report with remediation roadmap and priority risk matrix</li>
+        </ul>
+        <div class="code-snippet">
+          <span class="comment"># Internal recon — privilege escalation audit</span><br>
+          <span class="keyword">Import-Module</span> <span class="string">PowerView</span><br>
+          Get-DomainUser -AdminCount 1 |<br>
+          &nbsp;&nbsp;Select-Object samaccountname, memberof<br>
+          <span class="comment"># Result: 3 misconfigured delegations found</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-num">PROJECT_03</div>
+        <h3 class="project-title">UTM Deployment — JPOPE</h3>
+        <div class="project-subtitle">🛡️ University Open Day Infrastructure</div>
+        <p class="project-desc">Designed and deployed a complete Unified Threat Management solution for IPNET's annual open day event, protecting live demonstrations and sensitive institutional infrastructure.</p>
+        <ul class="project-highlights">
+          <li>Deployed OPNsense + FortiGate in a layered defense architecture</li>
+          <li>Configured web filtering, SSL inspection and application-layer firewall rules</li>
+          <li>Ran live attack simulations to validate IDS/IPS detection accuracy</li>
+          <li>Documented full technical architecture and post-event security review</li>
+        </ul>
+      </div>
+
+      <div class="project-card">
+        <div class="project-num">INITIATIVE</div>
+        <h3 class="project-title">H1v3 Security</h3>
+        <div class="project-subtitle">🐝 LinkedIn Cybersecurity Community</div>
+        <p class="project-desc">Founded H1v3 Security on LinkedIn as a platform for sharing practical cybersecurity knowledge, CTF writeups, threat intelligence insights and career guidance for emerging African security professionals.</p>
+        <ul class="project-highlights">
+          <li>Regular technical posts on offensive and defensive security techniques</li>
+          <li>CTF challenge writeups and methodology breakdowns</li>
+          <li>Community building across the West African security ecosystem</li>
+          <li>Focus on practical, hands-on learning over theoretical certification grinding</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Achievements -->
+<section id="achievements">
+  <div class="section-inner">
+    <div class="section-tag">Competitive Record</div>
+    <h2 class="section-title">CTF <span>Palmarès</span></h2>
+    <div class="achievements-layout">
+      <div>
+        <div class="achievement-card" style="margin-bottom: 24px;">
+          <div class="achievement-badge"><span>🏆 National Finalist · 2024</span></div>
+          <div class="achievement-title">ANCy CTF Championship</div>
+          <div class="achievement-detail">Reached the national finals of the Capture The Flag competition organized by Togo's Agence Nationale de la Cybersécurité — competing against the country's top security talents across offensive, defensive and forensics challenges.</div>
+        </div>
+        <div class="achievement-card">
+          <div class="achievement-badge"><span>🏆 National Finalist · 2025</span></div>
+          <div class="achievement-title">ANCy CTF Championship</div>
+          <div class="achievement-detail">Back-to-back national finalist — demonstrating consistent elite-level performance. Led technical strategy within the team, specializing in binary exploitation, web vulnerabilities and network forensics challenges.</div>
+        </div>
+      </div>
+      <div>
+        <div class="callout" style="margin-bottom: 24px;">
+          <div class="callout-icon">💬</div>
+          <div class="callout-text">"Reaching the national finals of the ANCy CTF — twice — is not a certification you can study for. It's proof that under pressure, against real adversaries, the skills hold. Every flag captured is a real-world vulnerability understood."</div>
+        </div>
+        <div class="achievement-card">
+          <div class="achievement-badge"><span>⚙️ Technical Lead</span></div>
+          <div class="achievement-title">Team Security Strategy</div>
+          <div class="achievement-detail">Coordinated attack strategies across CTF categories — assigning challenges by team member strengths, maintaining time discipline under competition pressure, and leading post-round debrief sessions. Security is a team sport.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Certifications -->
+<section id="certifications">
+  <div class="section-inner">
+    <div class="section-tag">Credentials & Roadmap</div>
+    <h2 class="section-title">Certification <span>Timeline</span></h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px;">
+      <div>
+        <div class="cert-timeline">
+
+          <div class="cert-item">
+            <div class="cert-date">DEC 2023</div>
+            <div class="cert-name">FCF — Threat Landscape 2.0</div>
+            <div class="cert-issuer">Fortinet Training Institute</div>
+            <div class="cert-status status-done">✓ Completed</div>
+          </div>
+
+          <div class="cert-item">
+            <div class="cert-date">JAN 2024</div>
+            <div class="cert-name">FCA — FortiGate 7.4 Operator</div>
+            <div class="cert-issuer">Fortinet Training Institute</div>
+            <div class="cert-status status-done">✓ Completed</div>
+          </div>
+
+          <div class="cert-item">
+            <div class="cert-date">JAN 2024</div>
+            <div class="cert-name">Cybersecurity Essentials</div>
+            <div class="cert-issuer">Cisco Networking Academy</div>
+            <div class="cert-status status-done">✓ Completed</div>
+          </div>
+
+          <div class="cert-item">
+            <div class="cert-date">FEB 2024</div>
+            <div class="cert-name">Networking Essentials</div>
+            <div class="cert-issuer">Cisco Networking Academy</div>
+            <div class="cert-status status-done">✓ Completed</div>
+          </div>
+
+          <div class="cert-item">
+            <div class="cert-date">MAR 2024</div>
+            <div class="cert-name">NDG Linux Essentials</div>
+            <div class="cert-issuer">Cisco Networking Academy</div>
+            <div class="cert-status status-done">✓ Completed</div>
+          </div>
+
+          <div class="cert-item">
+            <div class="cert-date">FEB 2026</div>
+            <div class="cert-name">CAPT — Certified Associate Penetration Tester</div>
+            <div class="cert-issuer">Hackviser · ID: HV-CAPT-EU6L19L7</div>
+            <div class="cert-status status-done">✓ Completed</div>
+          </div>
+
+          <div class="cert-item">
+            <div class="cert-date">IN PROGRESS</div>
+            <div class="cert-name">CWSE — Certified Web Security Expert</div>
+            <div class="cert-issuer">Hackviser</div>
+            <div class="cert-status status-progress">⟳ In Progress</div>
+          </div>
+
+          <div class="cert-item future">
+            <div class="cert-date">TARGET 2026</div>
+            <div class="cert-name">eJPT — eLearnSecurity Junior Penetration Tester</div>
+            <div class="cert-issuer">INE Security</div>
+            <div class="cert-status status-planned">◯ Planned</div>
+          </div>
+
+          <div class="cert-item future">
+            <div class="cert-date">TARGET 2027</div>
+            <div class="cert-name">OSCP — Offensive Security Certified Professional</div>
+            <div class="cert-issuer">Offensive Security</div>
+            <div class="cert-status status-planned">◯ Planned</div>
+          </div>
+
+        </div>
+      </div>
+
+      <div>
+        <div class="icdfa-callout">
+          <h3>🎓 ICDFA Associate Member Candidacy</h3>
+          <p>This portfolio was assembled in support of my application to the International Cybersecurity & Digital Forensics Academy at the Associate Member grade — recognizing early-career professionals with foundational knowledge and demonstrated industry impact.</p>
+          <p>My profile bridges the gap between academic training and real-world security operations: I've deployed live infrastructure, competed nationally, earned hands-on certifications and actively contribute to the security community through H1v3 Security.</p>
+          <div class="icdfa-grade">Applying for grade: ASSOCIATE MEMBER (AM) — up to 3 years experience track</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="section-tag">Get In Touch</div>
+    <h2 class="section-title">Let's <span>Connect</span></h2>
+    <div class="contact-grid">
+      <div>
+        <p class="contact-intro">Whether you're a recruiter, a fellow security researcher, or just curious about what goes on behind the firewall — I'm reachable. Preferably through secure channels, obviously.</p>
+        <div class="contact-links">
+          <a href="mailto:domsavio@gmail.com" class="contact-link">
+            <span class="contact-link-icon">✉️</span>
+            <span class="contact-link-text">domsavio@gmail.com</span>
+          </a>
+          <a href="https://www.linkedin.com/in/dominique-savio-sakoi-b607b333a" target="_blank" class="contact-link">
+            <span class="contact-link-icon">💼</span>
+            <span class="contact-link-text">linkedin.com/in/dominique-savio-sakoi</span>
+          </a>
+          <a href="tel:+22898246788" class="contact-link">
+            <span class="contact-link-icon">📞</span>
+            <span class="contact-link-text">+228 98 24 67 88</span>
+          </a>
+          <div class="contact-link" style="cursor:default;">
+            <span class="contact-link-icon">📍</span>
+            <span class="contact-link-text">Lomé, Togo</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="icdfa-callout">
+          <h3>🛡️ H1v3 Security</h3>
+          <p>Follow along on LinkedIn for CTF writeups, threat analysis breakdowns, and practical security tips from the field — no fluff, no paywalls, just craft.</p>
+          <a href="https://www.linkedin.com/in/dominique-savio-sakoi-b607b333a" target="_blank" class="btn-primary" style="display: inline-block; margin-top: 8px;">Follow H1v3 Security →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <span>© 2026 Dominique-Savio Sakoi · All systems nominal.</span>
+  <span>Built for ICDFA Associate Member Candidacy</span>
+  <span><span style="color: var(--accent2);">STATUS:</span> ONLINE<span class="blink">_</span></span>
+</footer>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const cursorRing = document.getElementById('cursorRing');
+
+  let mx = 0, my = 0;
+  let rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx + 'px';
+    cursor.style.top = my + 'px';
+  });
+
+  function animateCursor() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    cursorRing.style.left = rx + 'px';
+    cursorRing.style.top = ry + 'px';
+    requestAnimationFrame(animateCursor);
+  }
+  animateCursor();
+
+  document.querySelectorAll('a, button, .skill-card, .project-card').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.transform = 'translate(-50%, -50%) scale(2)';
+      cursorRing.style.width = '60px';
+      cursorRing.style.height = '60px';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+      cursorRing.style.width = '36px';
+      cursorRing.style.height = '36px';
+    });
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.skill-card, .project-card, .achievement-card, .cert-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
