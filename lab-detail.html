@@ -815,7 +815,8 @@ const marked = (function() {
     }
   };
 
-  const GITHUB_BASE = 'https://github.com/H1v3-lab/cybersecurity-portfolio/tree/main/projects/';
+  const GITHUB_BASE     = 'https://github.com/H1v3-lab/cybersecurity-portfolio/tree/main/projects/';
+  const GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/H1v3-lab/cybersecurity-portfolio/main/projects/';
 
   // ── Resolve lab ID from URL ────────────────────────────────────
   function getLabId() {
@@ -870,12 +871,22 @@ const marked = (function() {
     const ghLink = document.getElementById('githubLink');
     ghLink.href = GITHUB_BASE + project.folder;
 
-    // Fetch README
-    const readmeUrl = `projects/${project.folder}/README.md`;
+    // Fetch README — try local path first, fall back to GitHub raw URL
+    // (local fetch fails with NetworkError when opened via file:// protocol)
+    const readmeUrl    = `projects/${project.folder}/README.md`;
+    const rawGithubUrl = GITHUB_RAW_BASE + `${project.folder}/README.md`;
     try {
-      const res = await fetch(readmeUrl);
-      if (!res.ok) throw new Error(`README not found (HTTP ${res.status})`);
-      const mdText = await res.text();
+      let mdText;
+      try {
+        const res = await fetch(readmeUrl);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        mdText = await res.text();
+      } catch (_err) {
+        // Local fetch unavailable (e.g. file:// protocol) — use GitHub raw
+        const res = await fetch(rawGithubUrl);
+        if (!res.ok) throw new Error(`README not found (HTTP ${res.status})`);
+        mdText = await res.text();
+      }
 
       const bodyEl = document.getElementById('detailBody');
       bodyEl.innerHTML = marked.parse(mdText);
