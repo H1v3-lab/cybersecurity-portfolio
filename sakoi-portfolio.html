@@ -985,6 +985,27 @@
     .projects-grid-full { grid-template-columns: 1fr 1fr; }
   }
 
+  /* Language toggle */
+  .lang-toggle {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    padding: 6px 14px;
+    cursor: none;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: all 0.3s;
+    clip-path: polygon(5px 0%, 100% 0%, calc(100% - 5px) 100%, 0% 100%);
+  }
+
+  .lang-toggle:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+    box-shadow: var(--glow);
+  }
+
   /* Responsive */
   @media (max-width: 900px) {
     nav { padding: 20px 24px; }
@@ -1009,42 +1030,43 @@
 <nav>
   <div class="nav-logo">&lt;DS_SAKOI/&gt;</div>
   <ul class="nav-links">
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#lab-portfolio">Lab</a></li>
-    <li><a href="#achievements">CTF</a></li>
-    <li><a href="#certifications">Certs</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#skills" data-i18n="nav.skills">Skills</a></li>
+    <li><a href="#projects" data-i18n="nav.projects">Projects</a></li>
+    <li><a href="#lab-portfolio" data-i18n="nav.lab">Lab</a></li>
+    <li><a href="#achievements" data-i18n="nav.ctf">CTF</a></li>
+    <li><a href="#certifications" data-i18n="nav.certs">Certs</a></li>
+    <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
   </ul>
+  <button class="lang-toggle" id="langToggle" aria-label="Switch language">FR</button>
   <button class="nav-burger" id="navBurger" aria-label="Toggle navigation" aria-expanded="false">
     <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
   </button>
 </nav>
 
 <div class="mobile-nav" id="mobileNav">
-  <a href="#skills">Skills</a>
-  <a href="#projects">Projects</a>
-  <a href="#lab-portfolio">Lab Portfolio</a>
-  <a href="#achievements">CTF</a>
-  <a href="#certifications">Certifications</a>
-  <a href="#contact">Contact</a>
+  <a href="#skills" data-i18n="nav.skills">Skills</a>
+  <a href="#projects" data-i18n="nav.projects">Projects</a>
+  <a href="#lab-portfolio" data-i18n="nav.lab-mobile">Lab Portfolio</a>
+  <a href="#achievements" data-i18n="nav.ctf">CTF</a>
+  <a href="#certifications" data-i18n="nav.certifications-mobile">Certifications</a>
+  <a href="#contact" data-i18n="nav.contact">Contact</a>
 </div>
 
 <!-- Hero -->
 <section id="hero">
   <div class="hero-content">
-    <div class="hero-tag">Associate Member Candidate · ICDFA 2026</div>
+    <div class="hero-tag" data-i18n="hero.tag">Associate Member Candidate · ICDFA 2026</div>
     <h1 class="hero-name">
       <span data-text="Dominique-Savio" class="glitch">Dominique-Savio</span><br>
       Sakoi
     </h1>
-    <p class="hero-title">Cybersecurity Engineer &nbsp;·&nbsp; CTF Finalist &nbsp;·&nbsp; Pentest Specialist<span class="blink">_</span></p>
-    <p class="hero-bio">
+    <p class="hero-title" data-i18n="hero.title">Cybersecurity Engineer &nbsp;·&nbsp; CTF Finalist &nbsp;·&nbsp; Pentest Specialist<span class="blink">_</span></p>
+    <p class="hero-bio" data-i18n="hero.bio">
       I break systems <em>professionally</em> — then fix them better than they were. Third-year cybersecurity student and junior security engineer who finds elegance in a clean exploit chain and <em>sleeps soundly knowing firewalls are watching</em>. Currently defending networks at Miabé Innovation while studying full-time at IPNET. Introvert by nature, loud by exploit.
     </p>
     <div class="hero-actions">
-      <a href="#projects" class="btn-primary">View Projects</a>
-      <a href="https://www.linkedin.com/in/dominique-savio-sakoi-b607b333a" target="_blank" class="btn-secondary">LinkedIn Profile</a>
+      <a href="#projects" class="btn-primary" data-i18n="hero.btn-projects">View Projects</a>
+      <a href="https://www.linkedin.com/in/dominique-savio-sakoi-b607b333a" target="_blank" class="btn-secondary" data-i18n="hero.btn-linkedin">LinkedIn Profile</a>
     </div>
   </div>
 
@@ -1072,37 +1094,37 @@
 <div class="stats-bar">
   <div class="stat-item">
     <div class="stat-number">2×</div>
-    <div class="stat-label">CTF Finalist · ANCy</div>
+    <div class="stat-label" data-i18n="stat.ctf">CTF Finalist · ANCy</div>
   </div>
   <div class="stat-item">
     <div class="stat-number">5+</div>
-    <div class="stat-label">Certifications</div>
+    <div class="stat-label" data-i18n="stat.certs">Certifications</div>
   </div>
   <div class="stat-item">
     <div class="stat-number">25+</div>
-    <div class="stat-label">Lab Projects</div>
+    <div class="stat-label" data-i18n="stat.labs">Lab Projects</div>
   </div>
   <div class="stat-item">
     <div class="stat-number">3+</div>
-    <div class="stat-label">Years in Cybersecurity</div>
+    <div class="stat-label" data-i18n="stat.years">Years in Cybersecurity</div>
   </div>
   <div class="stat-item">
     <div class="stat-number">CAPT</div>
-    <div class="stat-label">Certified Pentest Associate</div>
+    <div class="stat-label" data-i18n="stat.capt">Certified Pentest Associate</div>
   </div>
 </div>
 
 <!-- Skills -->
 <section id="skills">
   <div class="section-inner">
-    <div class="section-tag">Core Competencies</div>
-    <h2 class="section-title">What I <span>Do</span></h2>
+    <div class="section-tag" data-i18n="skills.tag">Core Competencies</div>
+    <h2 class="section-title" data-i18n="skills.title">What I <span>Do</span></h2>
     <div class="skills-grid">
 
       <div class="skill-card">
         <span class="skill-icon">🔴</span>
-        <div class="skill-name">Penetration Testing</div>
-        <div class="skill-desc">Methodical offensive security — from reconnaissance to post-exploitation. I find the holes before the adversaries do.</div>
+        <div class="skill-name" data-i18n="skill.pentest.name">Penetration Testing</div>
+        <div class="skill-desc" data-i18n="skill.pentest.desc">Methodical offensive security — from reconnaissance to post-exploitation. I find the holes before the adversaries do.</div>
         <div class="skill-tags">
           <span class="tag red">Kali Linux</span>
           <span class="tag red">Metasploit</span>
@@ -1114,8 +1136,8 @@
 
       <div class="skill-card">
         <span class="skill-icon">🔵</span>
-        <div class="skill-name">Network Defense</div>
-        <div class="skill-desc">UTM deployment, firewall architecture, IDS/IPS configuration and VPN tunneling. Perimeter security that actually holds.</div>
+        <div class="skill-name" data-i18n="skill.netdef.name">Network Defense</div>
+        <div class="skill-desc" data-i18n="skill.netdef.desc">UTM deployment, firewall architecture, IDS/IPS configuration and VPN tunneling. Perimeter security that actually holds.</div>
         <div class="skill-tags">
           <span class="tag">FortiGate</span>
           <span class="tag">OPNsense</span>
@@ -1126,8 +1148,8 @@
 
       <div class="skill-card">
         <span class="skill-icon">🟢</span>
-        <div class="skill-name">SOC & Threat Monitoring</div>
-        <div class="skill-desc">Proactive threat detection, SIEM workflows, log analysis. Because the best incident is the one you stopped before it started.</div>
+        <div class="skill-name" data-i18n="skill.soc.name">SOC & Threat Monitoring</div>
+        <div class="skill-desc" data-i18n="skill.soc.desc">Proactive threat detection, SIEM workflows, log analysis. Because the best incident is the one you stopped before it started.</div>
         <div class="skill-tags">
           <span class="tag green">SIEM</span>
           <span class="tag green">Wireshark</span>
@@ -1138,8 +1160,8 @@
 
       <div class="skill-card">
         <span class="skill-icon">🪪</span>
-        <div class="skill-name">Identity & Access Mgmt</div>
-        <div class="skill-desc">Active Directory hardening, GPO enforcement, privilege management. I've both attacked and defended AD forests — perspective matters.</div>
+        <div class="skill-name" data-i18n="skill.iam.name">Identity & Access Mgmt</div>
+        <div class="skill-desc" data-i18n="skill.iam.desc">Active Directory hardening, GPO enforcement, privilege management. I've both attacked and defended AD forests — perspective matters.</div>
         <div class="skill-tags">
           <span class="tag">Active Directory</span>
           <span class="tag">GPO</span>
@@ -1149,8 +1171,8 @@
 
       <div class="skill-card">
         <span class="skill-icon">🐧</span>
-        <div class="skill-name">Systems Administration</div>
-        <div class="skill-desc">Linux/Windows server hardening, virtualization with VMware and Proxmox, scripting with Python for security automation.</div>
+        <div class="skill-name" data-i18n="skill.sysadmin.name">Systems Administration</div>
+        <div class="skill-desc" data-i18n="skill.sysadmin.desc">Linux/Windows server hardening, virtualization with VMware and Proxmox, scripting with Python for security automation.</div>
         <div class="skill-tags">
           <span class="tag green">Linux</span>
           <span class="tag green">Windows Server</span>
@@ -1161,8 +1183,8 @@
 
       <div class="skill-card">
         <span class="skill-icon">📋</span>
-        <div class="skill-name">Governance & Reporting</div>
-        <div class="skill-desc">Technical audit reports, security policy drafting, risk mitigation frameworks and team awareness training. Strategy meets execution.</div>
+        <div class="skill-name" data-i18n="skill.gov.name">Governance & Reporting</div>
+        <div class="skill-desc" data-i18n="skill.gov.desc">Technical audit reports, security policy drafting, risk mitigation frameworks and team awareness training. Strategy meets execution.</div>
         <div class="skill-tags">
           <span class="tag">Audit Reports</span>
           <span class="tag">Risk Management</span>
@@ -1177,20 +1199,20 @@
 <!-- Projects -->
 <section id="projects">
   <div class="section-inner">
-    <div class="section-tag">Featured Projects</div>
-    <h2 class="section-title">Work That <span>Matters</span></h2>
+    <div class="section-tag" data-i18n="projects.tag">Featured Projects</div>
+    <h2 class="section-title" data-i18n="projects.title">Work That <span>Matters</span></h2>
     <div class="projects-grid">
 
       <div class="project-card">
         <div class="project-num">PROJECT_01</div>
         <h3 class="project-title">Cyber-Système Nerveux Central</h3>
-        <div class="project-subtitle">🧠 Autonomous Defense Platform</div>
-        <p class="project-desc">An immersive, autonomous cyber defense platform designed as a "central nervous system" for enterprise infrastructure — detecting, classifying and responding to threats in real time without constant human intervention.</p>
+        <div class="project-subtitle" data-i18n="proj1.subtitle">🧠 Autonomous Defense Platform</div>
+        <p class="project-desc" data-i18n="proj1.desc">An immersive, autonomous cyber defense platform designed as a "central nervous system" for enterprise infrastructure — detecting, classifying and responding to threats in real time without constant human intervention.</p>
         <ul class="project-highlights">
-          <li>Architected a multi-layer detection engine combining behavioral analysis and signature-based rules</li>
-          <li>Integrated automated incident response playbooks for common threat vectors</li>
-          <li>Built real-time threat visualization dashboard for SOC analyst workflow</li>
-          <li>Designed with scalability in mind: modular architecture for custom threat intel feeds</li>
+          <li data-i18n="proj1.li1">Architected a multi-layer detection engine combining behavioral analysis and signature-based rules</li>
+          <li data-i18n="proj1.li2">Integrated automated incident response playbooks for common threat vectors</li>
+          <li data-i18n="proj1.li3">Built real-time threat visualization dashboard for SOC analyst workflow</li>
+          <li data-i18n="proj1.li4">Designed with scalability in mind: modular architecture for custom threat intel feeds</li>
         </ul>
         <div class="code-snippet">
           <span class="comment"># Autonomous threat classification engine</span><br>
@@ -1204,13 +1226,13 @@
       <div class="project-card">
         <div class="project-num">PROJECT_02</div>
         <h3 class="project-title">Active Directory Fortress</h3>
-        <div class="project-subtitle">🏛️ Full Infrastructure Hardening</div>
-        <p class="project-desc">End-to-end design, deployment and security testing of an enterprise Active Directory infrastructure — from initial forest architecture through attack simulation and remediation.</p>
+        <div class="project-subtitle" data-i18n="proj2.subtitle">🏛️ Full Infrastructure Hardening</div>
+        <p class="project-desc" data-i18n="proj2.desc">End-to-end design, deployment and security testing of an enterprise Active Directory infrastructure — from initial forest architecture through attack simulation and remediation.</p>
         <ul class="project-highlights">
-          <li>Designed complete AD forest with domain structure, OU hierarchy and trust relationships</li>
-          <li>Implemented 40+ Group Policy Objects covering workstation hardening and access controls</li>
-          <li>Conducted internal pentest: enumeration, Kerberoasting simulation, privilege escalation paths</li>
-          <li>Produced full audit report with remediation roadmap and priority risk matrix</li>
+          <li data-i18n="proj2.li1">Designed complete AD forest with domain structure, OU hierarchy and trust relationships</li>
+          <li data-i18n="proj2.li2">Implemented 40+ Group Policy Objects covering workstation hardening and access controls</li>
+          <li data-i18n="proj2.li3">Conducted internal pentest: enumeration, Kerberoasting simulation, privilege escalation paths</li>
+          <li data-i18n="proj2.li4">Produced full audit report with remediation roadmap and priority risk matrix</li>
         </ul>
         <div class="code-snippet">
           <span class="comment"># Internal recon — privilege escalation audit</span><br>
@@ -1224,26 +1246,26 @@
       <div class="project-card">
         <div class="project-num">PROJECT_03</div>
         <h3 class="project-title">UTM Deployment — JPOPE</h3>
-        <div class="project-subtitle">🛡️ University Open Day Infrastructure</div>
-        <p class="project-desc">Designed and deployed a complete Unified Threat Management solution for IPNET's annual open day event, protecting live demonstrations and sensitive institutional infrastructure.</p>
+        <div class="project-subtitle" data-i18n="proj3.subtitle">🛡️ University Open Day Infrastructure</div>
+        <p class="project-desc" data-i18n="proj3.desc">Designed and deployed a complete Unified Threat Management solution for IPNET's annual open day event, protecting live demonstrations and sensitive institutional infrastructure.</p>
         <ul class="project-highlights">
-          <li>Deployed OPNsense + FortiGate in a layered defense architecture</li>
-          <li>Configured web filtering, SSL inspection and application-layer firewall rules</li>
-          <li>Ran live attack simulations to validate IDS/IPS detection accuracy</li>
-          <li>Documented full technical architecture and post-event security review</li>
+          <li data-i18n="proj3.li1">Deployed OPNsense + FortiGate in a layered defense architecture</li>
+          <li data-i18n="proj3.li2">Configured web filtering, SSL inspection and application-layer firewall rules</li>
+          <li data-i18n="proj3.li3">Ran live attack simulations to validate IDS/IPS detection accuracy</li>
+          <li data-i18n="proj3.li4">Documented full technical architecture and post-event security review</li>
         </ul>
       </div>
 
       <div class="project-card">
         <div class="project-num">INITIATIVE</div>
         <h3 class="project-title">H1v3 Security</h3>
-        <div class="project-subtitle">🐝 LinkedIn Cybersecurity Community</div>
-        <p class="project-desc">Founded H1v3 Security on LinkedIn as a platform for sharing practical cybersecurity knowledge, CTF writeups, threat intelligence insights and career guidance for emerging African security professionals.</p>
+        <div class="project-subtitle" data-i18n="proj4.subtitle">🐝 LinkedIn Cybersecurity Community</div>
+        <p class="project-desc" data-i18n="proj4.desc">Founded H1v3 Security on LinkedIn as a platform for sharing practical cybersecurity knowledge, CTF writeups, threat intelligence insights and career guidance for emerging African security professionals.</p>
         <ul class="project-highlights">
-          <li>Regular technical posts on offensive and defensive security techniques</li>
-          <li>CTF challenge writeups and methodology breakdowns</li>
-          <li>Community building across the West African security ecosystem</li>
-          <li>Focus on practical, hands-on learning over theoretical certification grinding</li>
+          <li data-i18n="proj4.li1">Regular technical posts on offensive and defensive security techniques</li>
+          <li data-i18n="proj4.li2">CTF challenge writeups and methodology breakdowns</li>
+          <li data-i18n="proj4.li3">Community building across the West African security ecosystem</li>
+          <li data-i18n="proj4.li4">Focus on practical, hands-on learning over theoretical certification grinding</li>
         </ul>
       </div>
 
@@ -1254,20 +1276,20 @@
 <!-- Lab Portfolio -->
 <section id="lab-portfolio">
   <div class="section-inner">
-    <div class="section-tag">Technical Depth</div>
-    <h2 class="section-title">Lab <span>Portfolio</span></h2>
-    <p class="section-desc">25 hands-on cybersecurity projects spanning network defense, offensive operations, digital forensics, cloud security and AI-powered threat detection — each built and tested in an isolated environment.</p>
+    <div class="section-tag" data-i18n="lab.tag">Technical Depth</div>
+    <h2 class="section-title" data-i18n="lab.title">Lab <span>Portfolio</span></h2>
+    <p class="section-desc" data-i18n="lab.desc">25 hands-on cybersecurity projects spanning network defense, offensive operations, digital forensics, cloud security and AI-powered threat detection — each built and tested in an isolated environment.</p>
 
     <div class="project-filters" id="projectFilters">
-      <button class="filter-btn active" data-filter="all" aria-pressed="true">◈ All (25)</button>
-      <button class="filter-btn" data-filter="network" aria-pressed="false">⬡ Network Security</button>
-      <button class="filter-btn" data-filter="offensive" aria-pressed="false">⚔ Offensive Ops</button>
-      <button class="filter-btn" data-filter="forensics" aria-pressed="false">🔬 Forensics & DFIR</button>
-      <button class="filter-btn" data-filter="cloud" aria-pressed="false">☁ Cloud & AI</button>
-      <button class="filter-btn" data-filter="web" aria-pressed="false">🌐 Web Security</button>
+      <button class="filter-btn active" data-filter="all" aria-pressed="true" data-i18n="lab.filter.all">◈ All (25)</button>
+      <button class="filter-btn" data-filter="network" aria-pressed="false" data-i18n="lab.filter.network">⬡ Network Security</button>
+      <button class="filter-btn" data-filter="offensive" aria-pressed="false" data-i18n="lab.filter.offensive">⚔ Offensive Ops</button>
+      <button class="filter-btn" data-filter="forensics" aria-pressed="false" data-i18n="lab.filter.forensics">🔬 Forensics & DFIR</button>
+      <button class="filter-btn" data-filter="cloud" aria-pressed="false" data-i18n="lab.filter.cloud">☁ Cloud & AI</button>
+      <button class="filter-btn" data-filter="web" aria-pressed="false" data-i18n="lab.filter.web">🌐 Web Security</button>
     </div>
 
-    <div class="project-count" id="projectCount">// Showing all 25 projects</div>
+    <div class="project-count" id="projectCount" data-i18n="lab.count.all">// Showing all 25 projects</div>
 
     <div class="projects-grid-full" id="labGrid">
 
@@ -1275,300 +1297,300 @@
         <div class="project-num">LAB_01</div>
         <span class="project-cat cat-network">Network Security</span>
         <h3 class="project-title">Home Lab Setup</h3>
-        <div class="project-subtitle">🏠 Virtualized Cyber Lab</div>
-        <p class="project-desc">Complete home cybersecurity lab with VLAN-segmented network, virtualized infrastructure (VMware/Proxmox) and isolated attack/defense environments for hands-on training.</p>
+        <div class="project-subtitle" data-i18n="lab01.subtitle">🏠 Virtualized Cyber Lab</div>
+        <p class="project-desc" data-i18n="lab01.desc">Complete home cybersecurity lab with VLAN-segmented network, virtualized infrastructure (VMware/Proxmox) and isolated attack/defense environments for hands-on training.</p>
         <div class="project-tags">
           <span class="tag">VMware</span><span class="tag">Proxmox</span><span class="tag">pfSense</span><span class="tag">Kali Linux</span><span class="tag">VLANs</span>
         </div>
-        <span class="card-view-hint">View Details →</span>
+        <span class="card-view-hint" data-i18n="lab.view-hint">View Details →</span>
       </div>
 
       <div class="project-card" data-category="network" data-lab-id="02">
         <div class="project-num">LAB_02</div>
         <span class="project-cat cat-network">Network Security</span>
         <h3 class="project-title">Firewall Configuration</h3>
-        <div class="project-subtitle">🔥 Enterprise Perimeter Defense</div>
-        <p class="project-desc">Enterprise-grade firewall deployment with granular rule sets, QoS optimization, SSL inspection and compliance-ready audit logging for PCI-DSS and SOX environments.</p>
+        <div class="project-subtitle" data-i18n="lab02.subtitle">🔥 Enterprise Perimeter Defense</div>
+        <p class="project-desc" data-i18n="lab02.desc">Enterprise-grade firewall deployment with granular rule sets, QoS optimization, SSL inspection and compliance-ready audit logging for PCI-DSS and SOX environments.</p>
         <div class="project-tags">
           <span class="tag">pfSense</span><span class="tag">FortiGate</span><span class="tag">Python</span><span class="tag">PCI-DSS</span>
         </div>
-        <span class="card-view-hint">View Details →</span>
+        <span class="card-view-hint" data-i18n="lab.view-hint">View Details →</span>
       </div>
 
       <div class="project-card" data-category="network" data-lab-id="03">
         <div class="project-num">LAB_03</div>
         <span class="project-cat cat-network">Network Security</span>
         <h3 class="project-title">Wireshark Traffic Analysis</h3>
-        <div class="project-subtitle">📡 Network Forensics Lab</div>
-        <p class="project-desc">Deep packet inspection and network traffic forensics with Wireshark, custom Python dissectors, automated anomaly detection and protocol analysis scripts.</p>
+        <div class="project-subtitle" data-i18n="lab03.subtitle">📡 Network Forensics Lab</div>
+        <p class="project-desc" data-i18n="lab03.desc">Deep packet inspection and network traffic forensics with Wireshark, custom Python dissectors, automated anomaly detection and protocol analysis scripts.</p>
         <div class="project-tags">
           <span class="tag">Wireshark</span><span class="tag">Python</span><span class="tag">tcpdump</span><span class="tag">Tshark</span>
         </div>
-        <span class="card-view-hint">View Details →</span>
+        <span class="card-view-hint" data-i18n="lab.view-hint">View Details →</span>
       </div>
 
       <div class="project-card" data-category="network" data-lab-id="04">
         <div class="project-num">LAB_04</div>
         <span class="project-cat cat-network">Network Security</span>
         <h3 class="project-title">IDS/IPS Implementation</h3>
-        <div class="project-subtitle">🛡️ Multilayer Intrusion Detection</div>
-        <p class="project-desc">Enterprise multi-layer IDS/IPS architecture with custom Snort/Suricata signatures, automated incident response playbooks and full SIEM integration.</p>
+        <div class="project-subtitle" data-i18n="lab04.subtitle">🛡️ Multilayer Intrusion Detection</div>
+        <p class="project-desc" data-i18n="lab04.desc">Enterprise multi-layer IDS/IPS architecture with custom Snort/Suricata signatures, automated incident response playbooks and full SIEM integration.</p>
         <div class="project-tags">
           <span class="tag">Snort</span><span class="tag">Suricata</span><span class="tag">SIEM</span><span class="tag">Docker</span>
         </div>
-        <span class="card-view-hint">View Details →</span>
+        <span class="card-view-hint" data-i18n="lab.view-hint">View Details →</span>
       </div>
 
       <div class="project-card" data-category="network" data-lab-id="05">
         <div class="project-num">LAB_05</div>
         <span class="project-cat cat-network">Network Security</span>
         <h3 class="project-title">VPN Management System</h3>
-        <div class="project-subtitle">🔐 Enterprise VPN Infrastructure</div>
-        <p class="project-desc">Comprehensive VPN management with automated PKI certificate lifecycle, OpenVPN/IPSec dual-stack support, Ansible-driven deployment and compliance monitoring.</p>
+        <div class="project-subtitle" data-i18n="lab05.subtitle">🔐 Enterprise VPN Infrastructure</div>
+        <p class="project-desc" data-i18n="lab05.desc">Comprehensive VPN management with automated PKI certificate lifecycle, OpenVPN/IPSec dual-stack support, Ansible-driven deployment and compliance monitoring.</p>
         <div class="project-tags">
           <span class="tag">OpenVPN</span><span class="tag">IPSec</span><span class="tag">Ansible</span><span class="tag">PKI</span>
         </div>
-        <span class="card-view-hint">View Details →</span>
+        <span class="card-view-hint" data-i18n="lab.view-hint">View Details →</span>
       </div>
 
       <div class="project-card" data-category="network" data-lab-id="06">
         <div class="project-num">LAB_06</div>
         <span class="project-cat cat-network">Network Security</span>
         <h3 class="project-title">Secure Network Design</h3>
-        <div class="project-subtitle">⬡ Zero Trust Architecture</div>
-        <p class="project-desc">Enterprise Zero Trust network with microsegmentation, Network Access Control (NAC), automated policy enforcement and full visibility via GNS3/Terraform IaC.</p>
+        <div class="project-subtitle" data-i18n="lab06.subtitle">⬡ Zero Trust Architecture</div>
+        <p class="project-desc" data-i18n="lab06.desc">Enterprise Zero Trust network with microsegmentation, Network Access Control (NAC), automated policy enforcement and full visibility via GNS3/Terraform IaC.</p>
         <div class="project-tags">
           <span class="tag">Zero Trust</span><span class="tag">VLAN</span><span class="tag">NAC</span><span class="tag">Terraform</span>
         </div>
-        <span class="card-view-hint">View Details →</span>
+        <span class="card-view-hint" data-i18n="lab.view-hint">View Details →</span>
       </div>
 
       <div class="project-card" data-category="network" data-lab-id="07">
         <div class="project-num">LAB_07</div>
         <span class="project-cat cat-network">Network Security</span>
         <h3 class="project-title">Wireless Security</h3>
-        <div class="project-subtitle">📡 WPA3 Enterprise Deployment</div>
-        <p class="project-desc">Enterprise WiFi security with WPA3 implementation, 802.1X/RADIUS authentication, wireless intrusion detection and PCI-DSS-compliant guest network isolation.</p>
+        <div class="project-subtitle" data-i18n="lab07.subtitle">📡 WPA3 Enterprise Deployment</div>
+        <p class="project-desc" data-i18n="lab07.desc">Enterprise WiFi security with WPA3 implementation, 802.1X/RADIUS authentication, wireless intrusion detection and PCI-DSS-compliant guest network isolation.</p>
         <div class="project-tags">
           <span class="tag">WPA3</span><span class="tag">802.1X</span><span class="tag">RADIUS</span><span class="tag">WIDS</span>
         </div>
-        <span class="card-view-hint">View Details →</span>
+        <span class="card-view-hint" data-i18n="lab.view-hint">View Details →</span>
       </div>
 
       <div class="project-card" data-category="network" data-lab-id="08">
         <div class="project-num">LAB_08</div>
         <span class="project-cat cat-network">Identity & Access</span>
         <h3 class="project-title">Identity & Access Management</h3>
-        <div class="project-subtitle">🪪 Zero Trust IAM Platform</div>
-        <p class="project-desc">Full enterprise IAM solution with Active Directory, SSO (SAML 2.0/OAuth 2.0), MFA, Privileged Access Management and automated Zero Trust compliance frameworks.</p>
+        <div class="project-subtitle" data-i18n="lab08.subtitle">🪪 Zero Trust IAM Platform</div>
+        <p class="project-desc" data-i18n="lab08.desc">Full enterprise IAM solution with Active Directory, SSO (SAML 2.0/OAuth 2.0), MFA, Privileged Access Management and automated Zero Trust compliance frameworks.</p>
         <div class="project-tags">
           <span class="tag">Active Directory</span><span class="tag">SAML 2.0</span><span class="tag">OAuth</span><span class="tag">MFA</span><span class="tag">Keycloak</span>
         </div>
-        <span class="card-view-hint">View Details →</span>
+        <span class="card-view-hint" data-i18n="lab.view-hint">View Details →</span>
       </div>
 
       <div class="project-card" data-category="cloud" data-lab-id="09">
         <div class="project-num">LAB_09</div>
         <span class="project-cat cat-cloud">Cloud Security</span>
         <h3 class="project-title">Cloud Security Governance</h3>
-        <div class="project-subtitle">☁ Multi-Cloud CSPM</div>
-        <p class="project-desc">Multi-cloud security governance with policy-as-code, automated compliance scanning, Cloud Security Posture Management (CSPM) across AWS, Azure and GCP.</p>
+        <div class="project-subtitle" data-i18n="lab09.subtitle">☁ Multi-Cloud CSPM</div>
+        <p class="project-desc" data-i18n="lab09.desc">Multi-cloud security governance with policy-as-code, automated compliance scanning, Cloud Security Posture Management (CSPM) across AWS, Azure and GCP.</p>
         <div class="project-tags">
           <span class="tag">AWS</span><span class="tag">Azure</span><span class="tag">GCP</span><span class="tag">Terraform</span><span class="tag">CSPM</span>
         </div>
-        <span class="card-view-hint">View Details →</span>
+        <span class="card-view-hint" data-i18n="lab.view-hint">View Details →</span>
       </div>
 
       <div class="project-card" data-category="cloud" data-lab-id="10">
         <div class="project-num">LAB_10</div>
         <span class="project-cat cat-cloud">Threat Intelligence</span>
         <h3 class="project-title">Threat Intelligence Platform</h3>
-        <div class="project-subtitle">🎯 CTI Aggregation & Analysis</div>
-        <p class="project-desc">Enterprise CTI platform aggregating multiple threat feeds with STIX/TAXII standards, ML-powered classification and automated threat hunting capabilities.</p>
+        <div class="project-subtitle" data-i18n="lab10.subtitle">🎯 CTI Aggregation & Analysis</div>
+        <p class="project-desc" data-i18n="lab10.desc">Enterprise CTI platform aggregating multiple threat feeds with STIX/TAXII standards, ML-powered classification and automated threat hunting capabilities.</p>
         <div class="project-tags">
           <span class="tag">STIX/TAXII</span><span class="tag">MISP</span><span class="tag">Python</span><span class="tag">ML</span><span class="tag">Elasticsearch</span>
         </div>
-        <span class="card-view-hint">View Details →</span>
+        <span class="card-view-hint" data-i18n="lab.view-hint">View Details →</span>
       </div>
 
       <div class="project-card" data-category="forensics" data-lab-id="11">
         <div class="project-num">LAB_11</div>
         <span class="project-cat cat-forensics">Forensics</span>
         <h3 class="project-title">Malware Analysis Sandbox</h3>
-        <div class="project-subtitle">🦠 Behavioral Analysis Lab</div>
-        <p class="project-desc">Isolated sandbox for comprehensive malware analysis — static, dynamic and behavioral — with YARA rule authoring, automated sandboxing and threat intel correlation.</p>
+        <div class="project-subtitle" data-i18n="lab11.subtitle">🦠 Behavioral Analysis Lab</div>
+        <p class="project-desc" data-i18n="lab11.desc">Isolated sandbox for comprehensive malware analysis — static, dynamic and behavioral — with YARA rule authoring, automated sandboxing and threat intel correlation.</p>
         <div class="project-tags">
           <span class="tag green">Cuckoo</span><span class="tag green">YARA</span><span class="tag green">IDA Pro</span><span class="tag green">Docker</span>
         </div>
-        <span class="card-view-hint">View Details →</span>
+        <span class="card-view-hint" data-i18n="lab.view-hint">View Details →</span>
       </div>
 
       <div class="project-card" data-category="offensive" data-lab-id="12">
         <div class="project-num">LAB_12</div>
         <span class="project-cat cat-offensive">Offensive Security</span>
         <h3 class="project-title">Penetration Testing Framework</h3>
-        <div class="project-subtitle">⚔ OWASP/PTES Methodology</div>
-        <p class="project-desc">Structured penetration testing framework following OWASP, PTES and NIST standards — covering web, network, wireless and mobile with automated professional reporting.</p>
+        <div class="project-subtitle" data-i18n="lab12.subtitle">⚔ OWASP/PTES Methodology</div>
+        <p class="project-desc" data-i18n="lab12.desc">Structured penetration testing framework following OWASP, PTES and NIST standards — covering web, network, wireless and mobile with automated professional reporting.</p>
         <div class="project-tags">
           <span class="tag red">Metasploit</span><span class="tag red">Nmap</span><span class="tag red">Burp Suite</span><span class="tag red">OWASP</span>
         </div>
-        <span class="card-view-hint">View Details →</span>
+        <span class="card-view-hint" data-i18n="lab.view-hint">View Details →</span>
       </div>
 
       <div class="project-card" data-category="web" data-lab-id="13">
         <div class="project-num">LAB_13</div>
         <span class="project-cat cat-web">Web Security</span>
         <h3 class="project-title">Web Application Security</h3>
-        <div class="project-subtitle">🌐 OWASP Top 10 Testing</div>
-        <p class="project-desc">Complete web app security testing framework covering OWASP Top 10 2021 and ASVS 4.0 with automated scanning, manual exploitation and professional reporting.</p>
+        <div class="project-subtitle" data-i18n="lab13.subtitle">🌐 OWASP Top 10 Testing</div>
+        <p class="project-desc" data-i18n="lab13.desc">Complete web app security testing framework covering OWASP Top 10 2021 and ASVS 4.0 with automated scanning, manual exploitation and professional reporting.</p>
         <div class="project-tags">
           <span class="tag">OWASP Top 10</span><span class="tag">Burp Suite</span><span class="tag">SQLMap</span><span class="tag">ASVS</span>
         </div>
-        <span class="card-view-hint">View Details →</span>
+        <span class="card-view-hint" data-i18n="lab.view-hint">View Details →</span>
       </div>
 
       <div class="project-card" data-category="forensics" data-lab-id="14">
         <div class="project-num">LAB_14</div>
         <span class="project-cat cat-forensics">Forensics & DFIR</span>
         <h3 class="project-title">Digital Forensics & IR</h3>
-        <div class="project-subtitle">🔬 NIST/SANS DFIR Framework</div>
-        <p class="project-desc">End-to-end DFIR framework following NIST SP 800-86 and SANS methodology for evidence acquisition, timeline reconstruction and legally admissible incident reporting.</p>
+        <div class="project-subtitle" data-i18n="lab14.subtitle">🔬 NIST/SANS DFIR Framework</div>
+        <p class="project-desc" data-i18n="lab14.desc">End-to-end DFIR framework following NIST SP 800-86 and SANS methodology for evidence acquisition, timeline reconstruction and legally admissible incident reporting.</p>
         <div class="project-tags">
           <span class="tag green">Autopsy</span><span class="tag green">Volatility</span><span class="tag green">Python</span><span class="tag green">NIST</span>
         </div>
-        <span class="card-view-hint">View Details →</span>
+        <span class="card-view-hint" data-i18n="lab.view-hint">View Details →</span>
       </div>
 
       <div class="project-card" data-category="offensive" data-lab-id="15">
         <div class="project-num">LAB_15</div>
         <span class="project-cat cat-offensive">Offensive Security</span>
         <h3 class="project-title">Red Team Operations</h3>
-        <div class="project-subtitle">🎭 APT Simulation Framework</div>
-        <p class="project-desc">Advanced red team framework simulating nation-state APT campaigns with C2 infrastructure, lateral movement techniques and comprehensive MITRE ATT&CK coverage.</p>
+        <div class="project-subtitle" data-i18n="lab15.subtitle">🎭 APT Simulation Framework</div>
+        <p class="project-desc" data-i18n="lab15.desc">Advanced red team framework simulating nation-state APT campaigns with C2 infrastructure, lateral movement techniques and comprehensive MITRE ATT&CK coverage.</p>
         <div class="project-tags">
           <span class="tag red">C2 Framework</span><span class="tag red">MITRE ATT&CK</span><span class="tag red">OPSEC</span><span class="tag red">Python</span>
         </div>
-        <span class="card-view-hint">View Details →</span>
+        <span class="card-view-hint" data-i18n="lab.view-hint">View Details →</span>
       </div>
 
       <div class="project-card" data-category="offensive" data-lab-id="16">
         <div class="project-num">LAB_16</div>
         <span class="project-cat cat-offensive">Offensive Security</span>
         <h3 class="project-title">Exploit Development</h3>
-        <div class="project-subtitle">💥 Binary Exploitation Lab</div>
-        <p class="project-desc">Custom exploit development covering stack-based buffer overflow, heap exploitation, ROP chain construction, ASLR/DEP bypass and weaponized payload creation from scratch.</p>
+        <div class="project-subtitle" data-i18n="lab16.subtitle">💥 Binary Exploitation Lab</div>
+        <p class="project-desc" data-i18n="lab16.desc">Custom exploit development covering stack-based buffer overflow, heap exploitation, ROP chain construction, ASLR/DEP bypass and weaponized payload creation from scratch.</p>
         <div class="project-tags">
           <span class="tag red">GDB/PWNDBG</span><span class="tag red">Python</span><span class="tag red">Assembly</span><span class="tag red">ROP Chains</span>
         </div>
-        <span class="card-view-hint">View Details →</span>
+        <span class="card-view-hint" data-i18n="lab.view-hint">View Details →</span>
       </div>
 
       <div class="project-card" data-category="offensive" data-lab-id="17">
         <div class="project-num">LAB_17</div>
         <span class="project-cat cat-offensive">Offensive Security</span>
         <h3 class="project-title">Social Engineering Simulation</h3>
-        <div class="project-subtitle">🎣 Human Vulnerability Testing</div>
-        <p class="project-desc">Comprehensive social engineering simulation with phishing campaigns, vishing scenarios, pretexting playbooks and measurable security awareness impact analysis.</p>
+        <div class="project-subtitle" data-i18n="lab17.subtitle">🎣 Human Vulnerability Testing</div>
+        <p class="project-desc" data-i18n="lab17.desc">Comprehensive social engineering simulation with phishing campaigns, vishing scenarios, pretexting playbooks and measurable security awareness impact analysis.</p>
         <div class="project-tags">
           <span class="tag red">GoPhish</span><span class="tag red">SET</span><span class="tag red">OSINT</span><span class="tag red">Python</span>
         </div>
-        <span class="card-view-hint">View Details →</span>
+        <span class="card-view-hint" data-i18n="lab.view-hint">View Details →</span>
       </div>
 
       <div class="project-card" data-category="offensive" data-lab-id="18">
         <div class="project-num">LAB_18</div>
         <span class="project-cat cat-offensive">Offensive Security</span>
         <h3 class="project-title">Password Cracking & Analysis</h3>
-        <div class="project-subtitle">🔑 Credential Security Audit</div>
-        <p class="project-desc">GPU-accelerated password security audit suite with Hashcat/JtR, custom wordlists, rule-based mask attacks, hash identification and policy compliance testing.</p>
+        <div class="project-subtitle" data-i18n="lab18.subtitle">🔑 Credential Security Audit</div>
+        <p class="project-desc" data-i18n="lab18.desc">GPU-accelerated password security audit suite with Hashcat/JtR, custom wordlists, rule-based mask attacks, hash identification and policy compliance testing.</p>
         <div class="project-tags">
           <span class="tag red">Hashcat</span><span class="tag red">John the Ripper</span><span class="tag red">GPU</span><span class="tag red">Python</span>
         </div>
-        <span class="card-view-hint">View Details →</span>
+        <span class="card-view-hint" data-i18n="lab.view-hint">View Details →</span>
       </div>
 
       <div class="project-card" data-category="forensics" data-lab-id="19">
         <div class="project-num">LAB_19</div>
         <span class="project-cat cat-forensics">Forensics</span>
         <h3 class="project-title">Forensic Analysis Toolkit</h3>
-        <div class="project-subtitle">🔍 Multi-Vector Investigation Suite</div>
-        <p class="project-desc">Modular forensic toolkit covering disk, memory, network and mobile forensics with timeline analysis, AI-powered artifact correlation and automated reporting.</p>
+        <div class="project-subtitle" data-i18n="lab19.subtitle">🔍 Multi-Vector Investigation Suite</div>
+        <p class="project-desc" data-i18n="lab19.desc">Modular forensic toolkit covering disk, memory, network and mobile forensics with timeline analysis, AI-powered artifact correlation and automated reporting.</p>
         <div class="project-tags">
           <span class="tag green">Python</span><span class="tag green">Volatility</span><span class="tag green">NetworkMiner</span><span class="tag green">ELK</span>
         </div>
-        <span class="card-view-hint">View Details →</span>
+        <span class="card-view-hint" data-i18n="lab.view-hint">View Details →</span>
       </div>
 
       <div class="project-card" data-category="cloud" data-lab-id="20">
         <div class="project-num">LAB_20</div>
         <span class="project-cat cat-cloud">Threat Intelligence</span>
         <h3 class="project-title">Threat Hunting SOC</h3>
-        <div class="project-subtitle">🎯 Proactive APT Detection</div>
-        <p class="project-desc">Advanced SOC platform with proactive threat hunting, ML-powered behavioral analytics, Sigma rule deployment and orchestrated SOAR incident response workflows.</p>
+        <div class="project-subtitle" data-i18n="lab20.subtitle">🎯 Proactive APT Detection</div>
+        <p class="project-desc" data-i18n="lab20.desc">Advanced SOC platform with proactive threat hunting, ML-powered behavioral analytics, Sigma rule deployment and orchestrated SOAR incident response workflows.</p>
         <div class="project-tags">
           <span class="tag">ELK Stack</span><span class="tag">Sigma Rules</span><span class="tag">ML</span><span class="tag">SOAR</span>
         </div>
-        <span class="card-view-hint">View Details →</span>
+        <span class="card-view-hint" data-i18n="lab.view-hint">View Details →</span>
       </div>
 
       <div class="project-card" data-category="cloud" data-lab-id="21">
         <div class="project-num">LAB_21</div>
         <span class="project-cat cat-cloud">AI Security</span>
         <h3 class="project-title">AI-Powered Cybersecurity</h3>
-        <div class="project-subtitle">🤖 ML Threat Detection Platform</div>
-        <p class="project-desc">AI/ML cybersecurity platform with deep learning anomaly detection, NLP-powered log analysis, automated threat intel extraction and predictive security analytics.</p>
+        <div class="project-subtitle" data-i18n="lab21.subtitle">🤖 ML Threat Detection Platform</div>
+        <p class="project-desc" data-i18n="lab21.desc">AI/ML cybersecurity platform with deep learning anomaly detection, NLP-powered log analysis, automated threat intel extraction and predictive security analytics.</p>
         <div class="project-tags">
           <span class="tag">TensorFlow</span><span class="tag">NLP</span><span class="tag">Python</span><span class="tag">FastAPI</span>
         </div>
-        <span class="card-view-hint">View Details →</span>
+        <span class="card-view-hint" data-i18n="lab.view-hint">View Details →</span>
       </div>
 
       <div class="project-card" data-category="cloud" data-lab-id="22">
         <div class="project-num">LAB_22</div>
         <span class="project-cat cat-cloud">Blockchain Security</span>
         <h3 class="project-title">Blockchain Security Forensics</h3>
-        <div class="project-subtitle">🔗 Crypto Investigation Platform</div>
-        <p class="project-desc">Blockchain security and crypto forensics with transaction graph analysis, smart contract vulnerability auditing (Slither/Mythril) and DeFi threat monitoring.</p>
+        <div class="project-subtitle" data-i18n="lab22.subtitle">🔗 Crypto Investigation Platform</div>
+        <p class="project-desc" data-i18n="lab22.desc">Blockchain security and crypto forensics with transaction graph analysis, smart contract vulnerability auditing (Slither/Mythril) and DeFi threat monitoring.</p>
         <div class="project-tags">
           <span class="tag">Web3</span><span class="tag">Ethereum</span><span class="tag">Python</span><span class="tag">Slither</span>
         </div>
-        <span class="card-view-hint">View Details →</span>
+        <span class="card-view-hint" data-i18n="lab.view-hint">View Details →</span>
       </div>
 
       <div class="project-card" data-category="web" data-lab-id="23">
         <div class="project-num">LAB_23</div>
         <span class="project-cat cat-web">Web Security</span>
         <h3 class="project-title">Bug Bounty Platform</h3>
-        <div class="project-subtitle">🐛 Automated Vuln Discovery</div>
-        <p class="project-desc">Automated vulnerability discovery platform combining intelligent recon, Nuclei-powered scanning and structured bug bounty program management workflows.</p>
+        <div class="project-subtitle" data-i18n="lab23.subtitle">🐛 Automated Vuln Discovery</div>
+        <p class="project-desc" data-i18n="lab23.desc">Automated vulnerability discovery platform combining intelligent recon, Nuclei-powered scanning and structured bug bounty program management workflows.</p>
         <div class="project-tags">
           <span class="tag">Nuclei</span><span class="tag">Subfinder</span><span class="tag">OWASP ZAP</span><span class="tag">Docker</span>
         </div>
-        <span class="card-view-hint">View Details →</span>
+        <span class="card-view-hint" data-i18n="lab.view-hint">View Details →</span>
       </div>
 
       <div class="project-card" data-category="cloud" data-lab-id="24">
         <div class="project-num">LAB_24</div>
         <span class="project-cat cat-cloud">DevSecOps</span>
         <h3 class="project-title">DevSecOps Pipeline Security</h3>
-        <div class="project-subtitle">🔄 Shift-Left Security CI/CD</div>
-        <p class="project-desc">Complete DevSecOps pipeline with integrated SAST/DAST analysis, container security scanning, dependency auditing and automated compliance enforcement across CI/CD.</p>
+        <div class="project-subtitle" data-i18n="lab24.subtitle">🔄 Shift-Left Security CI/CD</div>
+        <p class="project-desc" data-i18n="lab24.desc">Complete DevSecOps pipeline with integrated SAST/DAST analysis, container security scanning, dependency auditing and automated compliance enforcement across CI/CD.</p>
         <div class="project-tags">
           <span class="tag">Jenkins</span><span class="tag">GitLab CI</span><span class="tag">SAST/DAST</span><span class="tag">Kubernetes</span>
         </div>
-        <span class="card-view-hint">View Details →</span>
+        <span class="card-view-hint" data-i18n="lab.view-hint">View Details →</span>
       </div>
 
       <div class="project-card" data-category="cloud" data-lab-id="25">
         <div class="project-num">LAB_25</div>
         <span class="project-cat cat-cloud">AI Security</span>
         <h3 class="project-title">IoT / AI Security Platform</h3>
-        <div class="project-subtitle">🏭 Industrial IoT Defense</div>
-        <p class="project-desc">Industrial IoT security platform with digital twin simulation, explainable AI (XAI) anomaly detection, global orchestration and immersive VR/AR security training interfaces.</p>
+        <div class="project-subtitle" data-i18n="lab25.subtitle">🏭 Industrial IoT Defense</div>
+        <p class="project-desc" data-i18n="lab25.desc">Industrial IoT security platform with digital twin simulation, explainable AI (XAI) anomaly detection, global orchestration and immersive VR/AR security training interfaces.</p>
         <div class="project-tags">
           <span class="tag">XAI</span><span class="tag">Digital Twin</span><span class="tag">IoT Security</span><span class="tag">VR/AR</span>
         </div>
-        <span class="card-view-hint">View Details →</span>
+        <span class="card-view-hint" data-i18n="lab.view-hint">View Details →</span>
       </div>
 
     </div>
@@ -1578,41 +1600,40 @@
 <!-- Achievements -->
 <section id="achievements">
   <div class="section-inner">
-    <div class="section-tag">Competitive Record</div>
-    <h2 class="section-title">CTF <span>Palmarès</span></h2>
+    <div class="section-tag" data-i18n="ach.tag">Competitive Record</div>
+    <h2 class="section-title" data-i18n="ach.title">CTF <span>Palmarès</span></h2>
     <div class="achievements-layout">
       <div>
         <div class="achievement-card" style="margin-bottom: 24px;">
-          <div class="achievement-badge"><span>🏆 National Finalist · 2024</span></div>
-          <div class="achievement-title">ANCy CTF Championship</div>
-          <div class="achievement-detail">Reached the national finals of the Capture The Flag competition organized by Togo's Agence Nationale de la Cybersécurité — competing against the country's top security talents across offensive, defensive and forensics challenges.</div>
+          <div class="achievement-badge"><span data-i18n="ach1.badge">🏆 National Finalist · 2024</span></div>
+          <div class="achievement-title" data-i18n="ach1.title">ANCy CTF Championship</div>
+          <div class="achievement-detail" data-i18n="ach1.detail">Reached the national finals of the Capture The Flag competition organized by Togo's Agence Nationale de la Cybersécurité — competing against the country's top security talents across offensive, defensive and forensics challenges.</div>
         </div>
         <div class="achievement-card">
-          <div class="achievement-badge"><span>🏆 National Finalist · 2025</span></div>
-          <div class="achievement-title">ANCy CTF Championship</div>
-          <div class="achievement-detail">Back-to-back national finalist — demonstrating consistent elite-level performance. Led technical strategy within the team, specializing in binary exploitation, web vulnerabilities and network forensics challenges.</div>
+          <div class="achievement-badge"><span data-i18n="ach2.badge">🏆 National Finalist · 2025</span></div>
+          <div class="achievement-title" data-i18n="ach2.title">ANCy CTF Championship</div>
+          <div class="achievement-detail" data-i18n="ach2.detail">Back-to-back national finalist — demonstrating consistent elite-level performance. Led technical strategy within the team, specializing in binary exploitation, web vulnerabilities and network forensics challenges.</div>
         </div>
       </div>
       <div>
         <div class="callout" style="margin-bottom: 24px;">
           <div class="callout-icon">💬</div>
-          <div class="callout-text">"Reaching the national finals of the ANCy CTF — twice — is not a certification you can study for. It's proof that under pressure, against real adversaries, the skills hold. Every flag captured is a real-world vulnerability understood."</div>
+          <div class="callout-text" data-i18n="ach.callout">"Reaching the national finals of the ANCy CTF — twice — is not a certification you can study for. It's proof that under pressure, against real adversaries, the skills hold. Every flag captured is a real-world vulnerability understood."</div>
         </div>
         <div class="achievement-card">
-          <div class="achievement-badge"><span>⚙️ Technical Lead</span></div>
-          <div class="achievement-title">Team Security Strategy</div>
-          <div class="achievement-detail">Coordinated attack strategies across CTF categories — assigning challenges by team member strengths, maintaining time discipline under competition pressure, and leading post-round debrief sessions. Security is a team sport.</div>
+          <div class="achievement-badge"><span data-i18n="ach3.badge">⚙️ Technical Lead</span></div>
+          <div class="achievement-title" data-i18n="ach3.title">Team Security Strategy</div>
+          <div class="achievement-detail" data-i18n="ach3.detail">Coordinated attack strategies across CTF categories — assigning challenges by team member strengths, maintaining time discipline under competition pressure, and leading post-round debrief sessions. Security is a team sport.</div>
         </div>
       </div>
     </div>
   </div>
 </section>
-
 <!-- Certifications -->
 <section id="certifications">
   <div class="section-inner">
-    <div class="section-tag">Credentials & Roadmap</div>
-    <h2 class="section-title">Certification <span>Timeline</span></h2>
+    <div class="section-tag" data-i18n="certs.tag">Credentials & Roadmap</div>
+    <h2 class="section-title" data-i18n="certs.title">Certification <span>Timeline</span></h2>
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px;">
       <div>
         <div class="cert-timeline">
@@ -1621,63 +1642,63 @@
             <div class="cert-date">DEC 2023</div>
             <div class="cert-name">FCF — Threat Landscape 2.0</div>
             <div class="cert-issuer">Fortinet Training Institute</div>
-            <div class="cert-status status-done">✓ Completed</div>
+            <div class="cert-status status-done" data-i18n="cert.status.done">✓ Completed</div>
           </div>
 
           <div class="cert-item">
             <div class="cert-date">JAN 2024</div>
             <div class="cert-name">FCA — FortiGate 7.4 Operator</div>
             <div class="cert-issuer">Fortinet Training Institute</div>
-            <div class="cert-status status-done">✓ Completed</div>
+            <div class="cert-status status-done" data-i18n="cert.status.done">✓ Completed</div>
           </div>
 
           <div class="cert-item">
             <div class="cert-date">JAN 2024</div>
             <div class="cert-name">Cybersecurity Essentials</div>
             <div class="cert-issuer">Cisco Networking Academy</div>
-            <div class="cert-status status-done">✓ Completed</div>
+            <div class="cert-status status-done" data-i18n="cert.status.done">✓ Completed</div>
           </div>
 
           <div class="cert-item">
             <div class="cert-date">FEB 2024</div>
             <div class="cert-name">Networking Essentials</div>
             <div class="cert-issuer">Cisco Networking Academy</div>
-            <div class="cert-status status-done">✓ Completed</div>
+            <div class="cert-status status-done" data-i18n="cert.status.done">✓ Completed</div>
           </div>
 
           <div class="cert-item">
             <div class="cert-date">MAR 2024</div>
             <div class="cert-name">NDG Linux Essentials</div>
             <div class="cert-issuer">Cisco Networking Academy</div>
-            <div class="cert-status status-done">✓ Completed</div>
+            <div class="cert-status status-done" data-i18n="cert.status.done">✓ Completed</div>
           </div>
 
           <div class="cert-item">
             <div class="cert-date">FEB 2026</div>
             <div class="cert-name">CAPT — Certified Associate Penetration Tester</div>
             <div class="cert-issuer">Hackviser · ID: HV-CAPT-EU6L19L7</div>
-            <div class="cert-status status-done">✓ Completed</div>
+            <div class="cert-status status-done" data-i18n="cert.status.done">✓ Completed</div>
           </div>
 
           <div class="cert-item">
-            <div class="cert-date">IN PROGRESS</div>
+            <div class="cert-date" data-i18n="cert.date.progress">IN PROGRESS</div>
             <div class="cert-name">CWSE — Certified Web Security Expert</div>
             <div class="cert-issuer">Hackviser</div>
-            <div class="cert-status status-progress">⟳ In Progress</div>
+            <div class="cert-status status-progress" data-i18n="cert.status.progress">⟳ In Progress</div>
           </div>
 
           <div class="cert-item future">
-            <div class="cert-date">TARGET 2026</div>
+            <div class="cert-date" data-i18n="cert.date.target2026">TARGET 2026</div>
             <div class="cert-name">eJPT — eLearnSecurity Junior Penetration Tester</div>
             <div class="cert-issuer">INE Security</div>
-            <div class="cert-status status-planned">◯ Planned</div>
+            <div class="cert-status status-planned" data-i18n="cert.status.planned">◯ Planned</div>
           </div>
 
           <div class="cert-item future">
-            <div class="cert-date">TARGET 2027</div>
+            <div class="cert-date" data-i18n="cert.date.target2027">TARGET 2027</div>
             <div class="cert-name">OSCP — Offensive Security Certified Professional</div>
             <div class="cert-issuer">Offensive Security</div>
-            <div class="cert-status status-planned">◯ Planned</div>
+            <div class="cert-status status-planned" data-i18n="cert.status.planned">◯ Planned</div>
           </div>
 
         </div>
@@ -1685,10 +1706,10 @@
 
       <div>
         <div class="icdfa-callout">
-          <h3>🎓 ICDFA Associate Member Candidacy</h3>
-          <p>This portfolio was assembled in support of my application to the International Cybersecurity & Digital Forensics Academy at the Associate Member grade — recognizing early-career professionals with foundational knowledge and demonstrated industry impact.</p>
-          <p>My profile bridges the gap between academic training and real-world security operations: I've deployed live infrastructure, competed nationally, earned hands-on certifications and actively contribute to the security community through H1v3 Security.</p>
-          <div class="icdfa-grade">Applying for grade: ASSOCIATE MEMBER (AM) — up to 3 years experience track</div>
+          <h3 data-i18n="icdfa.title">🎓 ICDFA Associate Member Candidacy</h3>
+          <p data-i18n="icdfa.p1">This portfolio was assembled in support of my application to the International Cybersecurity & Digital Forensics Academy at the Associate Member grade — recognizing early-career professionals with foundational knowledge and demonstrated industry impact.</p>
+          <p data-i18n="icdfa.p2">My profile bridges the gap between academic training and real-world security operations: I've deployed live infrastructure, competed nationally, earned hands-on certifications and actively contribute to the security community through H1v3 Security.</p>
+          <div class="icdfa-grade" data-i18n="icdfa.grade">Applying for grade: ASSOCIATE MEMBER (AM) — up to 3 years experience track</div>
         </div>
       </div>
     </div>
@@ -1698,11 +1719,11 @@
 <!-- Contact -->
 <section id="contact">
   <div class="section-inner">
-    <div class="section-tag">Get In Touch</div>
-    <h2 class="section-title">Let's <span>Connect</span></h2>
+    <div class="section-tag" data-i18n="contact.tag">Get In Touch</div>
+    <h2 class="section-title" data-i18n="contact.title">Let's <span>Connect</span></h2>
     <div class="contact-grid">
       <div>
-        <p class="contact-intro">Whether you're a recruiter, a fellow security researcher, or just curious about what goes on behind the firewall — I'm reachable. Preferably through secure channels, obviously.</p>
+        <p class="contact-intro" data-i18n="contact.intro">Whether you're a recruiter, a fellow security researcher, or just curious about what goes on behind the firewall — I'm reachable. Preferably through secure channels, obviously.</p>
         <div class="contact-links">
           <a href="mailto:domsavio@gmail.com" class="contact-link">
             <span class="contact-link-icon">✉️</span>
@@ -1728,9 +1749,9 @@
       </div>
       <div>
         <div class="icdfa-callout">
-          <h3>🛡️ H1v3 Security</h3>
-          <p>Follow along on LinkedIn for CTF writeups, threat analysis breakdowns, and practical security tips from the field — no fluff, no paywalls, just craft.</p>
-          <a href="https://www.linkedin.com/in/dominique-savio-sakoi-b607b333a" target="_blank" class="btn-primary" style="display: inline-block; margin-top: 8px;">Follow H1v3 Security →</a>
+          <h3 data-i18n="h1v3.title">🛡️ H1v3 Security</h3>
+          <p data-i18n="h1v3.text">Follow along on LinkedIn for CTF writeups, threat analysis breakdowns, and practical security tips from the field — no fluff, no paywalls, just craft.</p>
+          <a href="https://www.linkedin.com/in/dominique-savio-sakoi-b607b333a" target="_blank" class="btn-primary" style="display: inline-block; margin-top: 8px;" data-i18n="h1v3.btn">Follow H1v3 Security →</a>
         </div>
       </div>
     </div>
@@ -1739,8 +1760,8 @@
 
 <!-- Footer -->
 <footer>
-  <span>© 2026 Dominique-Savio Sakoi · All systems nominal.</span>
-  <span>Built for ICDFA Associate Member Candidacy</span>
+  <span data-i18n="footer.copyright">© 2026 Dominique-Savio Sakoi · All systems nominal.</span>
+  <span data-i18n="footer.icdfa">Built for ICDFA Associate Member Candidacy</span>
   <span><span style="color: var(--accent2);">STATUS:</span> ONLINE<span class="blink">_</span></span>
 </footer>
 
@@ -1844,7 +1865,16 @@
         if (match) visible++;
       });
 
-      countEl.textContent = `// Showing ${visible} project${visible !== 1 ? 's' : ''}`;
+      countEl.removeAttribute('data-i18n');
+      if (filter === 'all') {
+        countEl.textContent = currentLang === 'fr'
+          ? '// Affichage de tous les 25 projets'
+          : '// Showing all 25 projects';
+      } else {
+        countEl.textContent = currentLang === 'fr'
+          ? `// Affichage de ${visible} projet${visible !== 1 ? 's' : ''}`
+          : `// Showing ${visible} project${visible !== 1 ? 's' : ''}`;
+      }
     });
   });
 
@@ -1856,6 +1886,380 @@
       window.location.href = `lab-detail.html?lab=${labId}`;
     });
   });
+
+  // ── i18n Translation System ───────────────────────────────────────────────
+
+  const translations = {
+    en: {
+      // Navigation
+      'nav.skills': 'Skills',
+      'nav.projects': 'Projects',
+      'nav.lab': 'Lab',
+      'nav.ctf': 'CTF',
+      'nav.certs': 'Certs',
+      'nav.contact': 'Contact',
+      'nav.lab-mobile': 'Lab Portfolio',
+      'nav.certifications-mobile': 'Certifications',
+      // Hero
+      'hero.tag': 'Associate Member Candidate · ICDFA 2026',
+      'hero.title': 'Cybersecurity Engineer &nbsp;·&nbsp; CTF Finalist &nbsp;·&nbsp; Pentest Specialist<span class="blink">_</span>',
+      'hero.bio': 'I break systems <em>professionally</em> — then fix them better than they were. Third-year cybersecurity student and junior security engineer who finds elegance in a clean exploit chain and <em>sleeps soundly knowing firewalls are watching</em>. Currently defending networks at Miabé Innovation while studying full-time at IPNET. Introvert by nature, loud by exploit.',
+      'hero.btn-projects': 'View Projects',
+      'hero.btn-linkedin': 'LinkedIn Profile',
+      // Stats
+      'stat.ctf': 'CTF Finalist · ANCy',
+      'stat.certs': 'Certifications',
+      'stat.labs': 'Lab Projects',
+      'stat.years': 'Years in Cybersecurity',
+      'stat.capt': 'Certified Pentest Associate',
+      // Skills
+      'skills.tag': 'Core Competencies',
+      'skills.title': 'What I <span>Do</span>',
+      'skill.pentest.name': 'Penetration Testing',
+      'skill.pentest.desc': 'Methodical offensive security — from reconnaissance to post-exploitation. I find the holes before the adversaries do.',
+      'skill.netdef.name': 'Network Defense',
+      'skill.netdef.desc': 'UTM deployment, firewall architecture, IDS/IPS configuration and VPN tunneling. Perimeter security that actually holds.',
+      'skill.soc.name': 'SOC & Threat Monitoring',
+      'skill.soc.desc': 'Proactive threat detection, SIEM workflows, log analysis. Because the best incident is the one you stopped before it started.',
+      'skill.iam.name': 'Identity & Access Mgmt',
+      'skill.iam.desc': "Active Directory hardening, GPO enforcement, privilege management. I've both attacked and defended AD forests — perspective matters.",
+      'skill.sysadmin.name': 'Systems Administration',
+      'skill.sysadmin.desc': 'Linux/Windows server hardening, virtualization with VMware and Proxmox, scripting with Python for security automation.',
+      'skill.gov.name': 'Governance & Reporting',
+      'skill.gov.desc': 'Technical audit reports, security policy drafting, risk mitigation frameworks and team awareness training. Strategy meets execution.',
+      // Featured Projects
+      'projects.tag': 'Featured Projects',
+      'projects.title': 'Work That <span>Matters</span>',
+      'proj1.subtitle': '🧠 Autonomous Defense Platform',
+      'proj1.desc': 'An immersive, autonomous cyber defense platform designed as a "central nervous system" for enterprise infrastructure — detecting, classifying and responding to threats in real time without constant human intervention.',
+      'proj1.li1': 'Architected a multi-layer detection engine combining behavioral analysis and signature-based rules',
+      'proj1.li2': 'Integrated automated incident response playbooks for common threat vectors',
+      'proj1.li3': 'Built real-time threat visualization dashboard for SOC analyst workflow',
+      'proj1.li4': 'Designed with scalability in mind: modular architecture for custom threat intel feeds',
+      'proj2.subtitle': '🏛️ Full Infrastructure Hardening',
+      'proj2.desc': 'End-to-end design, deployment and security testing of an enterprise Active Directory infrastructure — from initial forest architecture through attack simulation and remediation.',
+      'proj2.li1': 'Designed complete AD forest with domain structure, OU hierarchy and trust relationships',
+      'proj2.li2': 'Implemented 40+ Group Policy Objects covering workstation hardening and access controls',
+      'proj2.li3': 'Conducted internal pentest: enumeration, Kerberoasting simulation, privilege escalation paths',
+      'proj2.li4': 'Produced full audit report with remediation roadmap and priority risk matrix',
+      'proj3.subtitle': '🛡️ University Open Day Infrastructure',
+      'proj3.desc': "Designed and deployed a complete Unified Threat Management solution for IPNET's annual open day event, protecting live demonstrations and sensitive institutional infrastructure.",
+      'proj3.li1': 'Deployed OPNsense + FortiGate in a layered defense architecture',
+      'proj3.li2': 'Configured web filtering, SSL inspection and application-layer firewall rules',
+      'proj3.li3': 'Ran live attack simulations to validate IDS/IPS detection accuracy',
+      'proj3.li4': 'Documented full technical architecture and post-event security review',
+      'proj4.subtitle': '🐝 LinkedIn Cybersecurity Community',
+      'proj4.desc': 'Founded H1v3 Security on LinkedIn as a platform for sharing practical cybersecurity knowledge, CTF writeups, threat intelligence insights and career guidance for emerging African security professionals.',
+      'proj4.li1': 'Regular technical posts on offensive and defensive security techniques',
+      'proj4.li2': 'CTF challenge writeups and methodology breakdowns',
+      'proj4.li3': 'Community building across the West African security ecosystem',
+      'proj4.li4': 'Focus on practical, hands-on learning over theoretical certification grinding',
+      // Lab Portfolio
+      'lab.tag': 'Technical Depth',
+      'lab.title': 'Lab <span>Portfolio</span>',
+      'lab.desc': '25 hands-on cybersecurity projects spanning network defense, offensive operations, digital forensics, cloud security and AI-powered threat detection — each built and tested in an isolated environment.',
+      'lab.filter.all': '◈ All (25)',
+      'lab.filter.network': '⬡ Network Security',
+      'lab.filter.offensive': '⚔ Offensive Ops',
+      'lab.filter.forensics': '🔬 Forensics & DFIR',
+      'lab.filter.cloud': '☁ Cloud & AI',
+      'lab.filter.web': '🌐 Web Security',
+      'lab.count.all': '// Showing all 25 projects',
+      'lab.view-hint': 'View Details →',
+      // Lab card subtitles & descriptions
+      'lab01.subtitle': '🏠 Virtualized Cyber Lab',
+      'lab01.desc': 'Complete home cybersecurity lab with VLAN-segmented network, virtualized infrastructure (VMware/Proxmox) and isolated attack/defense environments for hands-on training.',
+      'lab02.subtitle': '🔥 Enterprise Perimeter Defense',
+      'lab02.desc': 'Enterprise-grade firewall deployment with granular rule sets, QoS optimization, SSL inspection and compliance-ready audit logging for PCI-DSS and SOX environments.',
+      'lab03.subtitle': '📡 Network Forensics Lab',
+      'lab03.desc': 'Deep packet inspection and network traffic forensics with Wireshark, custom Python dissectors, automated anomaly detection and protocol analysis scripts.',
+      'lab04.subtitle': '🛡️ Multilayer Intrusion Detection',
+      'lab04.desc': 'Enterprise multi-layer IDS/IPS architecture with custom Snort/Suricata signatures, automated incident response playbooks and full SIEM integration.',
+      'lab05.subtitle': '🔐 Enterprise VPN Infrastructure',
+      'lab05.desc': 'Comprehensive VPN management with automated PKI certificate lifecycle, OpenVPN/IPSec dual-stack support, Ansible-driven deployment and compliance monitoring.',
+      'lab06.subtitle': '⬡ Zero Trust Architecture',
+      'lab06.desc': 'Enterprise Zero Trust network with microsegmentation, Network Access Control (NAC), automated policy enforcement and full visibility via GNS3/Terraform IaC.',
+      'lab07.subtitle': '📡 WPA3 Enterprise Deployment',
+      'lab07.desc': 'Enterprise WiFi security with WPA3 implementation, 802.1X/RADIUS authentication, wireless intrusion detection and PCI-DSS-compliant guest network isolation.',
+      'lab08.subtitle': '🪪 Zero Trust IAM Platform',
+      'lab08.desc': 'Full enterprise IAM solution with Active Directory, SSO (SAML 2.0/OAuth 2.0), MFA, Privileged Access Management and automated Zero Trust compliance frameworks.',
+      'lab09.subtitle': '☁ Multi-Cloud CSPM',
+      'lab09.desc': 'Multi-cloud security governance with policy-as-code, automated compliance scanning, Cloud Security Posture Management (CSPM) across AWS, Azure and GCP.',
+      'lab10.subtitle': '🎯 CTI Aggregation & Analysis',
+      'lab10.desc': 'Enterprise CTI platform aggregating multiple threat feeds with STIX/TAXII standards, ML-powered classification and automated threat hunting capabilities.',
+      'lab11.subtitle': '🦠 Behavioral Analysis Lab',
+      'lab11.desc': 'Isolated sandbox for comprehensive malware analysis — static, dynamic and behavioral — with YARA rule authoring, automated sandboxing and threat intel correlation.',
+      'lab12.subtitle': '⚔ OWASP/PTES Methodology',
+      'lab12.desc': 'Structured penetration testing framework following OWASP, PTES and NIST standards — covering web, network, wireless and mobile with automated professional reporting.',
+      'lab13.subtitle': '🌐 OWASP Top 10 Testing',
+      'lab13.desc': 'Complete web app security testing framework covering OWASP Top 10 2021 and ASVS 4.0 with automated scanning, manual exploitation and professional reporting.',
+      'lab14.subtitle': '🔬 NIST/SANS DFIR Framework',
+      'lab14.desc': 'End-to-end DFIR framework following NIST SP 800-86 and SANS methodology for evidence acquisition, timeline reconstruction and legally admissible incident reporting.',
+      'lab15.subtitle': '🎭 APT Simulation Framework',
+      'lab15.desc': 'Advanced red team framework simulating nation-state APT campaigns with C2 infrastructure, lateral movement techniques and comprehensive MITRE ATT&CK coverage.',
+      'lab16.subtitle': '💥 Binary Exploitation Lab',
+      'lab16.desc': 'Custom exploit development covering stack-based buffer overflow, heap exploitation, ROP chain construction, ASLR/DEP bypass and weaponized payload creation from scratch.',
+      'lab17.subtitle': '🎣 Human Vulnerability Testing',
+      'lab17.desc': 'Comprehensive social engineering simulation with phishing campaigns, vishing scenarios, pretexting playbooks and measurable security awareness impact analysis.',
+      'lab18.subtitle': '🔑 Credential Security Audit',
+      'lab18.desc': 'GPU-accelerated password security audit suite with Hashcat/JtR, custom wordlists, rule-based mask attacks, hash identification and policy compliance testing.',
+      'lab19.subtitle': '🔍 Multi-Vector Investigation Suite',
+      'lab19.desc': 'Modular forensic toolkit covering disk, memory, network and mobile forensics with timeline analysis, AI-powered artifact correlation and automated reporting.',
+      'lab20.subtitle': '🎯 Proactive APT Detection',
+      'lab20.desc': 'Advanced SOC platform with proactive threat hunting, ML-powered behavioral analytics, Sigma rule deployment and orchestrated SOAR incident response workflows.',
+      'lab21.subtitle': '🤖 ML Threat Detection Platform',
+      'lab21.desc': 'AI/ML cybersecurity platform with deep learning anomaly detection, NLP-powered log analysis, automated threat intel extraction and predictive security analytics.',
+      'lab22.subtitle': '🔗 Crypto Investigation Platform',
+      'lab22.desc': 'Blockchain security and crypto forensics with transaction graph analysis, smart contract vulnerability auditing (Slither/Mythril) and DeFi threat monitoring.',
+      'lab23.subtitle': '🐛 Automated Vuln Discovery',
+      'lab23.desc': 'Automated vulnerability discovery platform combining intelligent recon, Nuclei-powered scanning and structured bug bounty program management workflows.',
+      'lab24.subtitle': '🔄 Shift-Left Security CI/CD',
+      'lab24.desc': 'Complete DevSecOps pipeline with integrated SAST/DAST analysis, container security scanning, dependency auditing and automated compliance enforcement across CI/CD.',
+      'lab25.subtitle': '🏭 Industrial IoT Defense',
+      'lab25.desc': 'Industrial IoT security platform with digital twin simulation, explainable AI (XAI) anomaly detection, global orchestration and immersive VR/AR security training interfaces.',
+      // Achievements
+      'ach.tag': 'Competitive Record',
+      'ach.title': 'CTF <span>Palmarès</span>',
+      'ach1.badge': '🏆 National Finalist · 2024',
+      'ach1.title': 'ANCy CTF Championship',
+      'ach1.detail': "Reached the national finals of the Capture The Flag competition organized by Togo's Agence Nationale de la Cybersécurité — competing against the country's top security talents across offensive, defensive and forensics challenges.",
+      'ach2.badge': '🏆 National Finalist · 2025',
+      'ach2.title': 'ANCy CTF Championship',
+      'ach2.detail': 'Back-to-back national finalist — demonstrating consistent elite-level performance. Led technical strategy within the team, specializing in binary exploitation, web vulnerabilities and network forensics challenges.',
+      'ach3.badge': '⚙️ Technical Lead',
+      'ach3.title': 'Team Security Strategy',
+      'ach3.detail': 'Coordinated attack strategies across CTF categories — assigning challenges by team member strengths, maintaining time discipline under competition pressure, and leading post-round debrief sessions. Security is a team sport.',
+      'ach.callout': '"Reaching the national finals of the ANCy CTF — twice — is not a certification you can study for. It\'s proof that under pressure, against real adversaries, the skills hold. Every flag captured is a real-world vulnerability understood."',
+      // Certifications
+      'certs.tag': 'Credentials & Roadmap',
+      'certs.title': 'Certification <span>Timeline</span>',
+      'cert.status.done': '✓ Completed',
+      'cert.status.progress': '⟳ In Progress',
+      'cert.status.planned': '◯ Planned',
+      'cert.date.progress': 'IN PROGRESS',
+      'cert.date.target2026': 'TARGET 2026',
+      'cert.date.target2027': 'TARGET 2027',
+      'icdfa.title': '🎓 ICDFA Associate Member Candidacy',
+      'icdfa.p1': 'This portfolio was assembled in support of my application to the International Cybersecurity & Digital Forensics Academy at the Associate Member grade — recognizing early-career professionals with foundational knowledge and demonstrated industry impact.',
+      'icdfa.p2': "My profile bridges the gap between academic training and real-world security operations: I've deployed live infrastructure, competed nationally, earned hands-on certifications and actively contribute to the security community through H1v3 Security.",
+      'icdfa.grade': 'Applying for grade: ASSOCIATE MEMBER (AM) — up to 3 years experience track',
+      // Contact
+      'contact.tag': 'Get In Touch',
+      'contact.title': "Let's <span>Connect</span>",
+      'contact.intro': "Whether you're a recruiter, a fellow security researcher, or just curious about what goes on behind the firewall — I'm reachable. Preferably through secure channels, obviously.",
+      'h1v3.title': '🛡️ H1v3 Security',
+      'h1v3.text': 'Follow along on LinkedIn for CTF writeups, threat analysis breakdowns, and practical security tips from the field — no fluff, no paywalls, just craft.',
+      'h1v3.btn': 'Follow H1v3 Security →',
+      // Footer
+      'footer.copyright': '© 2026 Dominique-Savio Sakoi · All systems nominal.',
+      'footer.icdfa': 'Built for ICDFA Associate Member Candidacy',
+    },
+
+    fr: {
+      // Navigation
+      'nav.skills': 'Compétences',
+      'nav.projects': 'Projets',
+      'nav.lab': 'Labo',
+      'nav.ctf': 'CTF',
+      'nav.certs': 'Certifs',
+      'nav.contact': 'Contact',
+      'nav.lab-mobile': 'Portfolio Labo',
+      'nav.certifications-mobile': 'Certifications',
+      // Hero
+      'hero.tag': 'Candidat Membre Associé · ICDFA 2026',
+      'hero.title': 'Ingénieur en Cybersécurité &nbsp;·&nbsp; Finaliste CTF &nbsp;·&nbsp; Spécialiste Pentest<span class="blink">_</span>',
+      'hero.bio': "Je compromets des systèmes <em>professionnellement</em> — puis les renforce mieux qu'avant. Étudiant en troisième année de cybersécurité et ingénieur de sécurité junior qui trouve l'élégance dans une chaîne d'exploitation propre et <em>dort tranquille en sachant que les pare-feux veillent</em>. En charge de la défense réseau chez Miabé Innovation, tout en étudiant à plein temps à IPNET. Introverti de nature, bruyant par exploit.",
+      'hero.btn-projects': 'Voir les Projets',
+      'hero.btn-linkedin': 'Profil LinkedIn',
+      // Stats
+      'stat.ctf': 'Finaliste CTF · ANCy',
+      'stat.certs': 'Certifications',
+      'stat.labs': 'Projets de Labo',
+      'stat.years': 'Ans en Cybersécurité',
+      'stat.capt': 'Associé Certifié en Pentest',
+      // Skills
+      'skills.tag': 'Compétences Clés',
+      'skills.title': 'Ce que je <span>Fais</span>',
+      'skill.pentest.name': 'Tests de Pénétration',
+      'skill.pentest.desc': "Sécurité offensive méthodique — de la reconnaissance à la post-exploitation. Je trouve les failles avant les adversaires.",
+      'skill.netdef.name': 'Défense Réseau',
+      'skill.netdef.desc': "Déploiement UTM, architecture pare-feu, configuration IDS/IPS et tunnellisation VPN. Une sécurité périmétrique qui tient vraiment.",
+      'skill.soc.name': 'SOC & Surveillance des Menaces',
+      'skill.soc.desc': "Détection proactive des menaces, flux SIEM, analyse de logs. Parce que le meilleur incident est celui qu'on a arrêté avant qu'il commence.",
+      'skill.iam.name': 'Gestion des Identités & Accès',
+      'skill.iam.desc': "Durcissement Active Directory, application des GPO, gestion des privilèges. J'ai à la fois attaqué et défendu des forêts AD — la perspective compte.",
+      'skill.sysadmin.name': 'Administration des Systèmes',
+      'skill.sysadmin.desc': "Durcissement de serveurs Linux/Windows, virtualisation avec VMware et Proxmox, scripting Python pour l'automatisation sécurité.",
+      'skill.gov.name': 'Gouvernance & Rapports',
+      'skill.gov.desc': "Rapports d'audit techniques, rédaction de politiques de sécurité, cadres de gestion des risques et formation à la sensibilisation. Stratégie et exécution réunies.",
+      // Featured Projects
+      'projects.tag': 'Projets Phares',
+      'projects.title': 'Un Travail Qui <span>Compte</span>',
+      'proj1.subtitle': '🧠 Plateforme de Défense Autonome',
+      'proj1.desc': "Une plateforme immersive de cyber-défense autonome conçue comme un « système nerveux central » pour l'infrastructure d'entreprise — détectant, classifiant et répondant aux menaces en temps réel sans intervention humaine constante.",
+      'proj1.li1': "Architecture d'un moteur de détection multi-couches combinant analyse comportementale et règles basées sur les signatures",
+      'proj1.li2': 'Intégration de playbooks de réponse automatisée aux incidents pour les vecteurs de menaces courants',
+      'proj1.li3': "Construction d'un tableau de bord de visualisation des menaces en temps réel pour les analystes SOC",
+      'proj1.li4': 'Conçu pour la scalabilité : architecture modulaire pour des flux de renseignement sur les menaces personnalisés',
+      'proj2.subtitle': "🏛️ Durcissement Complet d'Infrastructure",
+      'proj2.desc': "Conception, déploiement et test de sécurité de bout en bout d'une infrastructure Active Directory d'entreprise — de l'architecture initiale de forêt à la simulation d'attaque et la remédiation.",
+      'proj2.li1': "Conception d'une forêt AD complète avec structure de domaine, hiérarchie d'unités organisationnelles et relations d'approbation",
+      "proj2.li2": "Implémentation de plus de 40 objets de stratégie de groupe couvrant le durcissement des postes et les contrôles d'accès",
+      'proj2.li3': "Conduite d'un pentest interne : énumération, simulation de Kerberoasting, chemins d'escalade de privilèges",
+      'proj2.li4': "Production d'un rapport d'audit complet avec feuille de route de remédiation et matrice de risques prioritaires",
+      'proj3.subtitle': '🛡️ Infrastructure Journée Portes Ouvertes IPNET',
+      'proj3.desc': "Conception et déploiement d'une solution complète de gestion unifiée des menaces pour la journée portes ouvertes annuelle d'IPNET, protégeant les démonstrations en direct et l'infrastructure institutionnelle sensible.",
+      'proj3.li1': "Déploiement d'OPNsense + FortiGate dans une architecture de défense en profondeur",
+      'proj3.li2': "Configuration du filtrage web, de l'inspection SSL et des règles de pare-feu applicatif",
+      "proj3.li3": "Exécution de simulations d'attaques en direct pour valider la précision de détection IDS/IPS",
+      'proj3.li4': "Documentation complète de l'architecture technique et revue de sécurité post-événement",
+      'proj4.subtitle': '🐝 Communauté Cybersécurité LinkedIn',
+      'proj4.desc': "Fondation de H1v3 Security sur LinkedIn comme plateforme de partage de connaissances pratiques en cybersécurité, de writeups CTF, d'analyses de renseignement sur les menaces et de conseils de carrière pour les professionnels africains de la sécurité émergents.",
+      'proj4.li1': 'Publications techniques régulières sur les techniques de sécurité offensive et défensive',
+      'proj4.li2': 'Writeups de challenges CTF et décompositions de méthodologie',
+      'proj4.li3': "Développement de la communauté dans l'écosystème sécurité d'Afrique de l'Ouest",
+      'proj4.li4': "Accent sur l'apprentissage pratique plutôt que la course aux certifications théoriques",
+      // Lab Portfolio
+      'lab.tag': 'Profondeur Technique',
+      'lab.title': 'Portfolio <span>Labo</span>',
+      'lab.desc': "25 projets de cybersécurité pratiques couvrant la défense réseau, les opérations offensives, la forensique numérique, la sécurité cloud et la détection de menaces par IA — chacun construit et testé dans un environnement isolé.",
+      'lab.filter.all': '◈ Tous (25)',
+      'lab.filter.network': '⬡ Sécurité Réseau',
+      'lab.filter.offensive': '⚔ Ops Offensives',
+      'lab.filter.forensics': '🔬 Forensique & DFIR',
+      'lab.filter.cloud': '☁ Cloud & IA',
+      'lab.filter.web': '🌐 Sécurité Web',
+      'lab.count.all': '// Affichage de tous les 25 projets',
+      'lab.view-hint': 'Voir les Détails →',
+      // Lab card subtitles & descriptions
+      'lab01.subtitle': '🏠 Labo Cyber Virtualisé',
+      'lab01.desc': "Labo de cybersécurité domestique complet avec réseau segmenté par VLAN, infrastructure virtualisée (VMware/Proxmox) et environnements attaque/défense isolés pour la formation pratique.",
+      'lab02.subtitle': '🔥 Défense Périmétrique Entreprise',
+      'lab02.desc': "Déploiement de pare-feu de niveau entreprise avec ensembles de règles granulaires, optimisation QoS, inspection SSL et journalisation d'audit conforme PCI-DSS et SOX.",
+      'lab03.subtitle': '📡 Labo de Forensique Réseau',
+      'lab03.desc': "Inspection approfondie des paquets et forensique du trafic réseau avec Wireshark, dissecteurs Python personnalisés, détection automatisée d'anomalies et scripts d'analyse de protocoles.",
+      'lab04.subtitle': "🛡️ Détection d'Intrusion Multicouche",
+      'lab04.desc': "Architecture IDS/IPS multi-couches d'entreprise avec signatures Snort/Suricata personnalisées, playbooks de réponse automatisée aux incidents et intégration SIEM complète.",
+      'lab05.subtitle': '🔐 Infrastructure VPN Entreprise',
+      'lab05.desc': "Gestion VPN complète avec cycle de vie automatisé des certificats PKI, support double pile OpenVPN/IPSec, déploiement piloté par Ansible et surveillance de conformité.",
+      'lab06.subtitle': '⬡ Architecture Zéro Confiance',
+      'lab06.desc': "Réseau Zéro Confiance d'entreprise avec micro-segmentation, contrôle d'accès réseau (NAC), application automatisée des politiques et visibilité totale via GNS3/Terraform IaC.",
+      'lab07.subtitle': '📡 Déploiement WPA3 Entreprise',
+      'lab07.desc': "Sécurité WiFi d'entreprise avec implémentation WPA3, authentification 802.1X/RADIUS, détection d'intrusion sans fil et isolation de réseau invité conforme PCI-DSS.",
+      'lab08.subtitle': '🪪 Plateforme IAM Zéro Confiance',
+      'lab08.desc': "Solution IAM d'entreprise complète avec Active Directory, SSO (SAML 2.0/OAuth 2.0), MFA, gestion des accès privilégiés et frameworks de conformité Zéro Confiance automatisés.",
+      'lab09.subtitle': '☁ CSPM Multi-Cloud',
+      'lab09.desc': "Gouvernance de sécurité multi-cloud avec politique-en-tant-que-code, analyse de conformité automatisée et gestion de la posture de sécurité cloud (CSPM) sur AWS, Azure et GCP.",
+      'lab10.subtitle': '🎯 Agrégation & Analyse CTI',
+      'lab10.desc': "Plateforme CTI d'entreprise agrégeant plusieurs flux de menaces avec les standards STIX/TAXII, classification par ML et capacités de chasse aux menaces automatisées.",
+      'lab11.subtitle': '🦠 Labo d\'Analyse Comportementale',
+      'lab11.desc': "Sandbox isolée pour l'analyse complète de malwares — statique, dynamique et comportementale — avec rédaction de règles YARA, sandboxing automatisé et corrélation de renseignement sur les menaces.",
+      'lab12.subtitle': '⚔ Méthodologie OWASP/PTES',
+      'lab12.desc': "Framework de tests de pénétration structuré suivant les standards OWASP, PTES et NIST — couvrant web, réseau, sans-fil et mobile avec reporting professionnel automatisé.",
+      'lab13.subtitle': '🌐 Tests OWASP Top 10',
+      'lab13.desc': "Framework complet de test de sécurité d'applications web couvrant OWASP Top 10 2021 et ASVS 4.0 avec analyse automatisée, exploitation manuelle et reporting professionnel.",
+      'lab14.subtitle': '🔬 Framework DFIR NIST/SANS',
+      'lab14.desc': "Framework DFIR de bout en bout suivant la méthodologie NIST SP 800-86 et SANS pour l'acquisition de preuves, la reconstruction de chronologie et le rapport d'incidents juridiquement recevable.",
+      'lab15.subtitle': '🎭 Framework de Simulation APT',
+      'lab15.desc': "Framework Red Team avancé simulant des campagnes APT d'État-nation avec infrastructure C2, techniques de mouvement latéral et couverture complète de MITRE ATT&CK.",
+      'lab16.subtitle': '💥 Labo d\'Exploitation Binaire',
+      'lab16.desc': "Développement d'exploits personnalisés couvrant le débordement de tampon basé sur la pile, l'exploitation du tas, la construction de chaînes ROP, le contournement ASLR/DEP et la création de charges utiles armées from scratch.",
+      'lab17.subtitle': '🎣 Test de Vulnérabilité Humaine',
+      'lab17.desc': "Simulation complète d'ingénierie sociale avec campagnes de phishing, scénarios de vishing, playbooks de prétexte et analyse mesurable de l'impact sur la sensibilisation à la sécurité.",
+      'lab18.subtitle': '🔑 Audit de Sécurité des Identifiants',
+      'lab18.desc': "Suite d'audit de sécurité des mots de passe accélérée par GPU avec Hashcat/JtR, listes de mots personnalisées, attaques par masque basées sur des règles, identification de hash et tests de conformité aux politiques.",
+      'lab19.subtitle': '🔍 Suite d\'Investigation Multi-Vecteurs',
+      'lab19.desc': "Boîte à outils forensique modulaire couvrant la forensique de disque, mémoire, réseau et mobile avec analyse de chronologie, corrélation d'artefacts par IA et reporting automatisé.",
+      'lab20.subtitle': '🎯 Détection APT Proactive',
+      'lab20.desc': "Plateforme SOC avancée avec chasse aux menaces proactive, analytique comportementale par ML, déploiement de règles Sigma et flux de réponse aux incidents SOAR orchestrés.",
+      'lab21.subtitle': '🤖 Plateforme de Détection ML des Menaces',
+      'lab21.desc': "Plateforme de cybersécurité IA/ML avec détection d'anomalies par deep learning, analyse de logs par NLP, extraction automatisée de renseignement sur les menaces et analytique sécurité prédictive.",
+      'lab22.subtitle': '🔗 Plateforme d\'Investigation Crypto',
+      'lab22.desc': "Sécurité blockchain et forensique crypto avec analyse de graphe de transactions, audit de vulnérabilité de smart contracts (Slither/Mythril) et surveillance des menaces DeFi.",
+      'lab23.subtitle': '🐛 Découverte Automatisée de Vulnérabilités',
+      'lab23.desc': "Plateforme automatisée de découverte de vulnérabilités combinant reconnaissance intelligente, analyse par Nuclei et flux de gestion de programme de bug bounty structurés.",
+      'lab24.subtitle': '🔄 Sécurité Shift-Left CI/CD',
+      'lab24.desc': "Pipeline DevSecOps complet avec analyse SAST/DAST intégrée, analyse de sécurité des conteneurs, audit des dépendances et application automatisée de la conformité dans CI/CD.",
+      'lab25.subtitle': '🏭 Défense IoT Industrielle',
+      'lab25.desc': "Plateforme de sécurité IoT industrielle avec simulation de jumeau numérique, détection d'anomalies par IA explicable (XAI), orchestration globale et interfaces de formation sécurité immersives VR/AR.",
+      // Achievements
+      'ach.tag': 'Palmarès Compétitif',
+      'ach.title': 'CTF <span>Palmarès</span>',
+      'ach1.badge': '🏆 Finaliste National · 2024',
+      'ach1.title': 'Championnat CTF ANCy',
+      'ach1.detail': "Atteint les finales nationales de la compétition Capture The Flag organisée par l'Agence Nationale de la Cybersécurité du Togo — en compétition contre les meilleurs talents sécurité du pays sur des challenges offensifs, défensifs et forensiques.",
+      'ach2.badge': '🏆 Finaliste National · 2025',
+      'ach2.title': 'Championnat CTF ANCy',
+      'ach2.detail': "Finaliste national pour la deuxième année consécutive — démontrant des performances de haut niveau constantes. A dirigé la stratégie technique au sein de l'équipe, spécialisé dans l'exploitation binaire, les vulnérabilités web et les challenges de forensique réseau.",
+      'ach3.badge': '⚙️ Lead Technique',
+      'ach3.title': "Stratégie Sécurité d'Équipe",
+      'ach3.detail': "Coordination des stratégies d'attaque sur toutes les catégories CTF — attribution des challenges selon les forces des membres, maintien de la discipline temporelle sous pression de compétition et animation des sessions de débriefing post-round. La sécurité est un sport d'équipe.",
+      'ach.callout': "« Atteindre les finales nationales du CTF ANCy — deux fois — n'est pas une certification qu'on peut étudier. C'est la preuve que sous pression, face à de vrais adversaires, les compétences tiennent. Chaque flag capturé est une vulnérabilité du monde réel comprise. »",
+      // Certifications
+      'certs.tag': 'Certifications & Feuille de Route',
+      'certs.title': 'Chronologie des <span>Certifications</span>',
+      'cert.status.done': '✓ Obtenu',
+      'cert.status.progress': '⟳ En Cours',
+      'cert.status.planned': '◯ Planifié',
+      'cert.date.progress': 'EN COURS',
+      'cert.date.target2026': 'OBJECTIF 2026',
+      'cert.date.target2027': 'OBJECTIF 2027',
+      'icdfa.title': '🎓 Candidature Membre Associé ICDFA',
+      'icdfa.p1': "Ce portfolio a été constitué pour soutenir ma candidature à l'International Cybersecurity & Digital Forensics Academy au grade de Membre Associé — reconnaissant les professionnels en début de carrière dotés de connaissances fondamentales et d'un impact démontré dans l'industrie.",
+      'icdfa.p2': "Mon profil comble le fossé entre la formation académique et les opérations de sécurité réelles : j'ai déployé une infrastructure en production, participé à des compétitions nationales, obtenu des certifications pratiques et contribue activement à la communauté sécurité via H1v3 Security.",
+      'icdfa.grade': "Grade demandé : MEMBRE ASSOCIÉ (AM) — parcours jusqu'à 3 ans d'expérience",
+      // Contact
+      'contact.tag': 'Me Contacter',
+      'contact.title': 'Restons en <span>Contact</span>',
+      'contact.intro': "Que vous soyez recruteur, chercheur en sécurité, ou simplement curieux de ce qui se passe derrière le pare-feu — je suis joignable. De préférence via des canaux sécurisés, évidemment.",
+      'h1v3.title': '🛡️ H1v3 Security',
+      'h1v3.text': 'Suivez sur LinkedIn pour des writeups CTF, des analyses de menaces et des conseils sécurité pratiques du terrain — sans rembourrage, sans paywalls, juste du savoir-faire.',
+      'h1v3.btn': 'Suivre H1v3 Security →',
+      // Footer
+      'footer.copyright': '© 2026 Dominique-Savio Sakoi · Tous les systèmes nominaux.',
+      'footer.icdfa': 'Construit pour la Candidature Membre Associé ICDFA',
+    }
+  };
+
+  let currentLang = localStorage.getItem('lang') || 'en';
+
+  function applyTranslations(lang) {
+    const t = translations[lang];
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.dataset.i18n;
+      if (t[key] !== undefined) {
+        el.innerHTML = t[key];
+      }
+    });
+    document.documentElement.lang = lang;
+    document.getElementById('langToggle').textContent = lang === 'en' ? 'FR' : 'EN';
+    document.getElementById('langToggle').setAttribute('aria-label',
+      lang === 'en' ? 'Passer en français' : 'Switch to English');
+    // Re-apply the active filter count label in the correct language
+    const activeBtn = document.querySelector('.filter-btn.active');
+    if (activeBtn) {
+      const filter = activeBtn.dataset.filter;
+      const projectCountEl = document.getElementById('projectCount');
+      if (filter === 'all') {
+        projectCountEl.textContent = t['lab.count.all'];
+      } else {
+        const visible = document.querySelectorAll('#labGrid .project-card:not(.hidden)').length;
+        projectCountEl.textContent = lang === 'fr'
+          ? `// Affichage de ${visible} projet${visible !== 1 ? 's' : ''}`
+          : `// Showing ${visible} project${visible !== 1 ? 's' : ''}`;
+      }
+    }
+  }
+
+  // Apply saved or default language on load
+  applyTranslations(currentLang);
+
+  document.getElementById('langToggle').addEventListener('click', () => {
+    currentLang = currentLang === 'en' ? 'fr' : 'en';
+    localStorage.setItem('lang', currentLang);
+    applyTranslations(currentLang);
+  });
+
 </script>
 
 </body>
